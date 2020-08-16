@@ -12,4 +12,4 @@ To get started:
 
 Then follow the on-screen instructions to set up your repo.
 
-### his repo contains omermadmon's portfolio and STEP projects!
+### This repo contains omermadmon's portfolio and STEP projects!

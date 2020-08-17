@@ -12,17 +12,31 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-/**
- * Adds a random greeting to the page.
- */
-function addRandomGreeting() {
-  const greetings =
-      ['Hello world!', '¡Hola Mundo!', '你好，世界！', 'Bonjour le monde!'];
 
-  // Pick a random greeting.
-  const greeting = greetings[Math.floor(Math.random() * greetings.length)];
+// Create a key-value object for storing clubs achievements.
+var achievements =
+    {
+      'mhfc' : 'to be done.',
+      'juve' : 'to be done.',
+      'tott' : 'to be done.',
+      'inter' : 'to be done.',
+      'hrg' : 'to be done.'
+    }; 
 
-  // Add it to the page.
-  const greetingContainer = document.getElementById('greeting-container');
-  greetingContainer.innerText = greeting;
+// Achievements Generator.
+function addRandomAchievement() {
+
+  // Pick a random club.
+  const clubs = Object.keys(achievements);
+  const club = clubs[Math.floor(Math.random() * clubs.length)];
+  const imgUrl = 'images/' + club + '-logo.png';
+
+  // Get the corresponding achievement text.
+  const achievement = achievements[club];
+
+  // Add image to the page.
+  document.getElementById('achievement-image').src = imgUrl;
+
+  // Add text to the page.
+  document.getElementById('achievement-container').innerText = achievement;
 }

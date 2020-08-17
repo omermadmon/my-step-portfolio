@@ -16,11 +16,23 @@
 // Create a key-value object for storing clubs achievements.
 var achievements =
     {
-      'mhfc' : 'to be done.',
-      'juve' : 'to be done.',
-      'tott' : 'to be done.',
-      'inter' : 'to be done.',
-      'hrg' : 'to be done.'
+      'mhfc' : 'In FM2013, I led Maccabi Haifa to the \
+                European Champions Cup semi-final!',
+      'juve' : 'The first time I was playing FM was back in 2006, \
+                when Juventus was on of the greatest teams in europe. \
+                \nLeading this club to the European Champions Cup final \
+                was my first FM experience.',
+      'tott' : 'Tottenham Hotspur is one of the many great football clubs \
+                of the coty of London, but they never managed to be \
+                considered as the greatest club of the city. My FM challenge \
+                was changing this fact...',
+      'inter' : 'After 4 years of managing Hapoel Ramat-Gan with huge success, \
+                 I got a (virtual) offer from Inter. \nIn half a season I \
+                 managed to raise from 10th place all the way up to the \
+                 honorable 2nd place in the italian football league, the Seria A.',
+      'hrg' : 'This one is my favourite one!\nIn 4 years (in the game, of course) I \
+               have qualified to the first israeli leauge, won the israeli national \
+               cup, and also won Athletico Madrid in the European Champions Cup!'
     }; 
 
 // Achievements Generator.

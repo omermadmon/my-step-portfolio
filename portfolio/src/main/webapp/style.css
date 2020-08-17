@@ -7,3 +7,35 @@
 #greeting-container {
   margin-top: 20px;
 }
+
+body {
+  background-color: lightslategrey;
+}
+
+h1 {
+  color: azure;
+  font-family: verdana;
+  text-align: center;
+}
+
+h2 {
+  color: azure;
+  font-family: verdana;
+  text-align: center;
+}
+
+p {
+  color: azure;
+  font-family: verdana;
+  font-size: 20px;
+}
+
+a {
+  color: blanchedalmond;
+  font-family: verdana;
+  font-size: 20px;
+}
+
+img {
+    width: 254px;
+}

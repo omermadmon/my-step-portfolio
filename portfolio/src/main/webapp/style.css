@@ -47,5 +47,6 @@ button {
   background-color: lightslategrey;
   color: azure;
   font-size: 20px;
+  border-radius: 8px;
   border: 2px solid azure;
 }

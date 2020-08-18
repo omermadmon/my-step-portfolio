@@ -64,7 +64,7 @@ function displayAllAchievements(){
 
     // Foreach club insert a new row with the corresponding achievement.
     for(let i = 0; i < clubs.length; ++i){
-        var row = table.insertRow(0);
+        var row = table.insertRow(-1);
         row.insertCell(0).innerHTML = clubs[i];
         row.insertCell(1).innerHTML = achievements[clubs[i]];
     }

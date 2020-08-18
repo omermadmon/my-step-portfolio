@@ -67,3 +67,17 @@ button {
   margin-left: 25px;
   margin-bottom: 25px;
 }
+
+table {
+   background-color: lightslategrey;
+   color: azure;
+   border: 1px solid azure;
+   font-family: verdana;
+   width: 750px;
+   margin-left: auto;
+   margin-right: auto;
+}
+
+td {
+    padding:20px 15px;
+}

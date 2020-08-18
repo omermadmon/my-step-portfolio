@@ -4,6 +4,21 @@
   width: 650px;
 }
 
+#topnav {
+  background-color: azure;
+  text-align: center;
+}
+
+#topnav a {
+  float: center;
+  color: lightslategrey;
+  text-align: center;
+  padding: 18px 18px;
+  text-decoration: none;
+  font-family: verdana;
+  font-size: 20px;
+}
+
 #achievement-container {
   color: blanchedalmond;
   font-family: verdana;

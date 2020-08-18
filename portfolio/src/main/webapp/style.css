@@ -55,6 +55,7 @@ a {
 
 img {
   width: 254px;
+  margin-top: 25px;
 }
 
 button {
@@ -63,4 +64,6 @@ button {
   font-size: 20px;
   border-radius: 8px;
   border: 2px solid azure;
+  margin-left: 25px;
+  margin-bottom: 25px;
 }

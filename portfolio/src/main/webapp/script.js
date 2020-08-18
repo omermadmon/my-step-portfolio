@@ -65,7 +65,6 @@ function displayAllAchievements(){
     // Foreach club insert a new row with the corresponding achievement.
     for(let i = 0; i < clubs.length; ++i){
         var row = table.insertRow(-1);
-        //row.insertCell(0).innerHTML = clubs[i];
         var imgUrl = 'images/' + clubs[i] + '-logo.png';
         row.insertCell(0).innerHTML = "<img src=" + imgUrl + " alt='club-logo'>";
         row.insertCell(1).innerHTML = achievements[clubs[i]];

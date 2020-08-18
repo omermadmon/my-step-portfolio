@@ -52,3 +52,20 @@ function addRandomAchievement() {
   // Add text to the page.
   document.getElementById('achievement-container').innerText = achievement;
 }
+
+// Write all achievements to a table.
+function displayAllAchievements(){
+    
+    // Get all clubs.
+    const clubs = Object.keys(achievements);    
+
+    // Create a table for holding achievements and clubs' names.
+    var table = document.getElementById("achievements-table");
+
+    // Foreach club insert a new row with the corresponding achievement.
+    for(let i = 0; i < clubs.length; ++i){
+        var row = table.insertRow(0);
+        row.insertCell(0).innerHTML = clubs[i];
+        row.insertCell(1).innerHTML = achievements[clubs[i]];
+    }
+}

@@ -19,7 +19,7 @@ var achievements =
       'mhfc' : 'In FM2013, I led Maccabi Haifa to the \
                 European Champions Cup semi-final!',
       'juve' : 'The first time I was playing FM was back in 2006, \
-                when Juventus was on of the greatest teams in europe. \
+                when Juventus was one of the greatest teams in europe. \
                 \nLeading this club to the European Champions Cup final \
                 was my first FM experience.',
       'tott' : 'Tottenham Hotspur is one of the many great football clubs \

@@ -4,6 +4,80 @@
   width: 650px;
 }
 
-#greeting-container {
-  margin-top: 20px;
+#topnav {
+  background-color: azure;
+  text-align: center;
+}
+
+#topnav a {
+  float: center;
+  color: lightslategrey;
+  text-align: center;
+  padding: 18px 18px;
+  text-decoration: none;
+  font-family: verdana;
+  font-size: 20px;
+}
+
+#achievement-container {
+  color: blanchedalmond;
+  font-family: verdana;
+  font-size: 20px;
+}
+
+body {
+  background-color: lightslategrey;
+}
+
+h1 {
+  color: azure;
+  font-family: verdana;
+  text-align: center;
+}
+
+h2 {
+  color: azure;
+  font-family: verdana;
+  text-align: center;
+}
+
+p {
+  color: azure;
+  font-family: verdana;
+  font-size: 20px;
+}
+
+a {
+  color: blanchedalmond;
+  font-family: verdana;
+  font-size: 20px;
+}
+
+img {
+  width: 254px;
+  margin-top: 25px;
+}
+
+button {
+  background-color: lightslategrey;
+  color: azure;
+  font-size: 20px;
+  border-radius: 8px;
+  border: 2px solid azure;
+  margin-left: 25px;
+  margin-bottom: 25px;
+}
+
+table {
+   background-color: lightslategrey;
+   color: azure;
+   border: 1px solid azure;
+   font-family: verdana;
+   width: 750px;
+   margin-left: auto;
+   margin-right: auto;
+}
+
+td {
+    padding:20px 15px;
 }

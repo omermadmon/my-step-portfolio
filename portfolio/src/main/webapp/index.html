@@ -2,17 +2,38 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>My Portfolio</title>
+    <title>Omer Madmon - Portfolio</title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
   </head>
   <body>
-    <div id="content">
-      <h1>My Portfolio</h1>
-      <p>This is my portfolio.</p>
-      <p>Click here to get a random message:</p>
-      <button onclick="addRandomGreeting()">Hello</button>
-      <div id="greeting-container"></div>
+      
+    <div id="topnav">
+        <a href="https://github.com/omermadmon" target="_blank">GitHub</a>
+        <a href="https://linkedin.com/in/omer-madmon" target="_blank">Linkedin</a>
+        <a href="https://twitter.com/OmerMadmon" target="_blank">Twitter</a>
+        <a href="mailto:omermadmon@gmail.com" target="_blank">e-mail</a>
     </div>
+    
+    <div id="content">
+      <h1>Omer Madmon - Portfolio</h1>
+      <h2>A Football Manager Enthusiast.</h2>
+      <p>
+        This is my portfolio, where I will display my entire FM achievements.
+        (<a href="https://en.wikipedia.org/wiki/Football_Manager">what's FM?</a>)
+        <br><br>In addition, I am a 2nd year data science and engineering student, 
+        so I am doing my best to utilize my data analysis knowledge for optimizing my FM skills
+        in the fields of tactics and lineups selection, transfer market activities, and more.
+      </p>
+      <p>Check out my FIFA2018 ratings prediction project:</p>
+      <a href="https://github.com/omermadmon/prj_FIFA">GitHub repo</a>
+      <p>My FM achievement:</p>
+      <button onclick="addRandomAchievement()">Generate an achievement</button>
+      <button onclick="location.href='achievements.html'" type="button">
+         All achievements</button>
+      <div id="achievement-container"></div>
+      <img id='achievement-image' src="/images/mhfc-logo.png" alt="club-logo">  
+     </div>
+
   </body>
 </html>

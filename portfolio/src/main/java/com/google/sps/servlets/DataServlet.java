@@ -22,7 +22,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
 
-/** Servlet that returns some example content.*/
+/** Servlet that returns a random favourite club,
+    to be displayed on main page.*/
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
 

@@ -45,6 +45,9 @@ p {
   color: azure;
   font-family: verdana;
   font-size: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 650px;
 }
 
 a {

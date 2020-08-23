@@ -96,3 +96,16 @@ table {
 td {
     padding:20px 15px;
 }
+
+ul {
+    color: azure;
+    font-family: verdana;
+    font-size: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 650px;
+}
+
+li {
+    padding:20px 15px;
+}

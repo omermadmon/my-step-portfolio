@@ -94,7 +94,7 @@ function getHardCodedComments(){
     commentsList.innerHTML = '';
     Object.entries(comments).forEach(([author, comment]) => {
         var listItemText = '<strong>' + author + 
-        ' said: </strong>' + comment;
+        ' said: </strong><br>' + comment;
         commentsList.appendChild(createListElement(listItemText));
     });
 }

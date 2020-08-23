@@ -77,3 +77,33 @@ function getRandomFavouriteClubs() {
     document.getElementById('favourite-club-container').innerText = club;
   });
 }
+
+// Displays hard coded comments in a list.
+function getHardCodedComments(){
+
+    // Hard coded comments in json format. 
+    comments = {
+        "G. Buffon" : "Awesome!",
+        "Y. Katan" : "Wonderful!",
+        "A. Benado" : "Amazing!",
+        "A. Del-Piero" : "Extraordinary!"
+    }
+
+    // Creates comments list and fill it  with json content.
+    const commentsList = document.getElementById('comments-list');
+    commentsList.innerHTML = '';
+    Object.entries(comments).forEach(([author, comment]) => {
+        var listItemText = '<strong>' + author + 
+        ' said: </strong>' + comment;
+        commentsList.appendChild(createListElement(listItemText));
+    });
+}
+
+/** Creates an <li> element containing text. Taken from: 
+step/walkthroughs/week-3-server/examples/server-stats/
+    src/main/webapp/script.js */
+function createListElement(htmlCode) {
+  const liElement = document.createElement('li');
+  liElement.innerHTML = htmlCode;
+  return liElement;
+}

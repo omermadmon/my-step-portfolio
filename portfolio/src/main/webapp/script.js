@@ -78,18 +78,19 @@ function getRandomFavouriteClubs() {
   });
 }
 
-// Displays hard coded comments in a list.
-function getHardCodedComments(){
+/** Fetches from comments servlet and applies 
+    writeHardCodedCommentsToList on JSON string containing 
+    some hard coded comments.*/ 
+function getHardCodedComments() {
+    fetch('/comments').then(response => response.json())
+    .then((commentsJSON) => writeHardCodedCommentsToList(commentsJSON));
+}
 
-    // Hard coded comments in json format. 
-    comments = {
-        "G. Buffon" : "Awesome!",
-        "Y. Katan" : "Wonderful!",
-        "A. Benado" : "Amazing!",
-        "A. Del-Piero" : "Extraordinary!"
-    }
+/** Gets hard coded comments (in JSON string format)
+    and displays the comments in a list on comments.html*/
+function writeHardCodedCommentsToList(comments){
 
-    // Creates comments list and fill it  with json content.
+    // Creates comments list and fill it  with JSON content.
     const commentsList = document.getElementById('comments-list');
     commentsList.innerHTML = '';
     Object.entries(comments).forEach(([author, comment]) => {

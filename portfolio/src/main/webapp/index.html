@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
   </head>
-  <body>
+  <body onload="getRandomFavouriteClubs()">
       
     <div id="topnav">
         <a href="https://github.com/omermadmon" target="_blank">GitHub</a>
@@ -17,7 +17,8 @@
     
     <div id="content">
       <h1>Omer Madmon - Portfolio</h1>
-      <h2>A Football Manager Enthusiast.</h2>
+      <h4>STEP Intern, BSc Data Science Student, Football Manager enthusiast and a proud fan of 
+          <i id="favourite-club-container"></i></h4>
       <p>
         This is my portfolio, where I will display my entire FM achievements.
         (<a href="https://en.wikipedia.org/wiki/Football_Manager">what's FM?</a>)
@@ -32,7 +33,7 @@
       <button onclick="location.href='achievements.html'" type="button">
          All achievements</button>
       <div id="achievement-container"></div>
-      <img id='achievement-image' src="/images/mhfc-logo.png" alt="club-logo">  
+      <img id='achievement-image' src="/images/mhfc-logo.png" alt="club-logo">
      </div>
 
   </body>

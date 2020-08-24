@@ -19,14 +19,31 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import java.util.List;
 
-/** Servlet that returns some example content. TODO: modify this file to handle comments data */
+/** Servlet that returns a random favourite club,
+    to be displayed on main page.*/
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
 
+  // List all of my favourite football clubs.
+  private List<String> favouriteClubs;
+  
+  @Override
+  public void init() {
+    // Add my favourite clubs to favouriteClubs.
+    favouriteClubs = new ArrayList<>();
+    favouriteClubs.add("Maccabi Haifa FC");
+    favouriteClubs.add("Juventus FC");
+  }
+
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    // Generate a random club to pass to JS.
+    String club = favouriteClubs.get((int) 
+                  (Math.random() * favouriteClubs.size()));
     response.setContentType("text/html;");
-    response.getWriter().println("<h1>Hello world!</h1>");
+    response.getWriter().println(club);
   }
 }

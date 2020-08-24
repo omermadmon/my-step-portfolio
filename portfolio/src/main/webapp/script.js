@@ -70,3 +70,10 @@ function displayAllAchievements(){
         row.insertCell(1).innerHTML = achievements[clubs[i]];
     }
 }
+
+// Favourite Clubs Generator.
+function getRandomFavouriteClubs() {
+  fetch('/data').then(response => response.text()).then((club) => {
+    document.getElementById('favourite-club-container').innerText = club;
+  });
+}

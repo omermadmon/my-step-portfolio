@@ -79,16 +79,15 @@ function getRandomFavouriteClubs() {
 }
 
 /** Fetches from comments servlet and applies 
-    writeHardCodedCommentsToList on JSON string containing 
-    some hard coded comments.*/ 
-function getHardCodedComments() {
+    writeHardCodedCommentsToList on JSON string containing comments */ 
+function getComments() {
     fetch('/comments').then(response => response.json())
-    .then((commentsJSON) => writeHardCodedCommentsToList(commentsJSON));
+    .then((commentsJSON) => writeCommentsToList(commentsJSON));
 }
 
-/** Gets hard coded comments (in JSON string format)
-    and displays the comments in a list on comments.html*/
-function writeHardCodedCommentsToList(comments){
+/** Gets comments (in JSON string format),
+    and displays them in a list on comments.html*/
+function writeCommentsToList(comments){
 
     // Creates comments list and fill it  with JSON content.
     const commentsList = document.getElementById('comments-list');

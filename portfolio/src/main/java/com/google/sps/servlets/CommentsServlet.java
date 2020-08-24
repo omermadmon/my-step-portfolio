@@ -32,18 +32,12 @@ public class CommentsServlet extends HttpServlet {
   
   @Override
   public void init() {
-
-    // Write initial hard coded comments.
     comments = new HashMap<String, String>();
-    comments.put("G. Buffon", "Awesome!");
-    comments.put("Y. Katan", "Wonderful!");
-    comments.put("A. Benado", "Amazing!");
-    comments.put("A. Del-Piero", "Extraordinary!");
-
   }
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    
     // Transform HashMap to JSON string.
     Gson gson = new Gson();
     String json = gson.toJson(comments);
@@ -51,5 +45,32 @@ public class CommentsServlet extends HttpServlet {
     // Send the JSON as the response
     response.setContentType("application/json;");
     response.getWriter().println(json);
+  }
+
+  @Override
+  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    
+    // Write comment from request to comments HashMap.
+    String firstName = request.getParameter("fname");
+    String lastName = request.getParameter("lname");
+    String commentText = request.getParameter("comment-text");
+
+    String name = formatName(firstName, lastName);
+    comments.put(name, commentText);
+
+    // Redirect back to the comments HTML page.
+    response.sendRedirect("/comments.html");
+  }
+
+  // convert name format: Omer Madmon => O. Madmon
+  private String formatName(String firstName, String lastName){
+      if (firstName == null && lastName == null){
+          return "Anonymous";
+      } else if (firstName == null){
+          return lastName;
+      } else if (lastName == null){
+          return firstName;
+      }
+      return firstName.charAt(0) + ". " + lastName;
   }
 }

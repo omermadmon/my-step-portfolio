@@ -25,13 +25,14 @@
 
     <div id="comments-form">
         <h2>Got something to say?</h2>
-        <form action="/comments.html" method="POST">
+        <form action="/comments" method="POST">
             <label for="fname">First name:</label><br>
             <input type="text" id="fname" name="fname"><br><br>
             <label for="lname">Last name:</label><br>
             <input type="text" id="lname" name="lname"><br><br>
             <label for="comment-text">Your comment:</label><br>
-            <input type="text" id="comment-text" name="comment-text"><br><br>
+            <input type="text" id="comment-text" 
+             name="comment-text" required><br><br>
             <input type="submit" id="submit-comment"/>
         </form>
     </div>

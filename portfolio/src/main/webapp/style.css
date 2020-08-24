@@ -109,3 +109,26 @@ ul {
 li {
     padding:20px 15px;
 }
+
+form {
+    color: azure;
+    font-family: verdana;
+    font-size: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 650px;
+}
+
+input {
+    background-color: blanchedalmond;
+    color: lightslategrey;
+    font-family: verdana;
+    font-size: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#comment-text {
+    height: 150px;
+    width: 400px;
+}

@@ -64,13 +64,14 @@ public class CommentsServlet extends HttpServlet {
 
   // convert name format: Omer Madmon => O. Madmon
   private String formatName(String firstName, String lastName){
-      if (firstName == null && lastName == null){
+      if (firstName.equals("") && lastName.equals("")){
           return "Anonymous";
-      } else if (firstName == null){
+      } else if (firstName.equals("")){
           return lastName;
-      } else if (lastName == null){
+      } else if (lastName.equals("")){
           return firstName;
-      }
-      return firstName.charAt(0) + ". " + lastName;
+      } else {
+          return firstName.charAt(0) + ". " + lastName;
+      }    
   }
 }

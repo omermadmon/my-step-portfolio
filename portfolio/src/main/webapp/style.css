@@ -119,7 +119,7 @@ form {
     width: 650px;
 }
 
-input {
+input, textarea {
     background-color: blanchedalmond;
     color: lightslategrey;
     font-family: verdana;

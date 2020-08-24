@@ -132,3 +132,13 @@ input {
     height: 150px;
     width: 400px;
 }
+
+#submit-comment {
+    background-color: lightslategrey;
+    color: azure;
+    font-size: 20px;
+    border-radius: 8px;
+    border: 2px solid azure;
+    margin-left: auto;
+    margin-bottom: auto;
+}

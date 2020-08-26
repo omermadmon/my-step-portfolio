@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Comments</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+  </head>
+  <body onload="getComments()">
+      
+    <div id="topnav">
+        <a href="https://github.com/omermadmon" target="_blank">GitHub</a>
+        <a href="https://linkedin.com/in/omer-madmon" target="_blank">Linkedin</a>
+        <a href="https://twitter.com/OmerMadmon" target="_blank">Twitter</a>
+        <a href="mailto:omermadmon@gmail.com" target="_blank">e-mail</a>
+    </div>
+    
+    <div id="comments">
+      <h1>Your Comments</h1>
+      <p>This page displays visitors' comments, and in the
+          near future these comments will be stored in one of GCP
+          data store services.
+      </p>
+      <ul id="comments-list"></ul>
+    </div>
+
+    <div id="comments-form">
+        <h2>Got something to say?</h2>
+        <form action="/comments" method="POST">
+            <label for="fname">First name:</label><br>
+            <input type="text" id="fname" name="fname" value=""><br><br>
+            <label for="lname">Last name:</label><br>
+            <input type="text" id="lname" name="lname" value=""><br><br>
+            <label for="comment-text">Your comment:</label><br>
+            <textarea type="text" id="comment-text" 
+             name="comment-text" required></textarea><br><br>
+            <input type="submit" id="submit-comment"/>
+        </form>
+    </div>
+
+  </body>
+</html>

@@ -96,3 +96,49 @@ table {
 td {
     padding:20px 15px;
 }
+
+ul {
+    color: azure;
+    font-family: verdana;
+    font-size: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 650px;
+}
+
+li {
+    padding:20px 15px;
+}
+
+form {
+    color: azure;
+    font-family: verdana;
+    font-size: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 650px;
+}
+
+input, textarea {
+    background-color: blanchedalmond;
+    color: lightslategrey;
+    font-family: verdana;
+    font-size: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#comment-text {
+    height: 150px;
+    width: 400px;
+}
+
+#submit-comment {
+    background-color: lightslategrey;
+    color: azure;
+    font-size: 20px;
+    border-radius: 8px;
+    border: 2px solid azure;
+    margin-left: auto;
+    margin-bottom: auto;
+}

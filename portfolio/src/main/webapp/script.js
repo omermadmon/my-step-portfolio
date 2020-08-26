@@ -77,3 +77,33 @@ function getRandomFavouriteClubs() {
     document.getElementById('favourite-club-container').innerText = club;
   });
 }
+
+/** Fetches from comments servlet and applies 
+    writeHardCodedCommentsToList on JSON string containing comments */ 
+function getComments() {
+    fetch('/comments').then(response => response.json())
+    .then((commentsJSON) => writeCommentsToList(commentsJSON));
+}
+
+/** Gets comments (in JSON string format),
+    and displays them in a list on comments.html*/
+function writeCommentsToList(comments){
+
+    // Creates comments list and fill it  with JSON content.
+    const commentsList = document.getElementById('comments-list');
+    commentsList.innerHTML = '';
+    Object.entries(comments).forEach(([author, comment]) => {
+        var listItemText = '<strong>' + author + 
+        ' said: </strong><br>' + comment;
+        commentsList.appendChild(createListElement(listItemText));
+    });
+}
+
+/** Creates an <li> element containing text. Taken from: 
+step/walkthroughs/week-3-server/examples/server-stats/
+    src/main/webapp/script.js */
+function createListElement(htmlCode) {
+  const liElement = document.createElement('li');
+  liElement.innerHTML = htmlCode;
+  return liElement;
+}

@@ -79,7 +79,7 @@ function getRandomFavouriteClubs() {
 }
 
 /** Fetches from comments servlet and applies 
-    writeHardCodedCommentsToList on JSON string containing comments */ 
+    writeCommentsToList on JSON string containing comments */ 
 function getComments() {
     fetch('/comments').then(response => response.json())
     .then((commentsJSON) => writeCommentsToList(commentsJSON));

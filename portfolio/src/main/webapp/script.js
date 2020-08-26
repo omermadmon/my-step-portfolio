@@ -89,7 +89,7 @@ function getComments() {
     and displays them in a list on comments.html*/
 function writeCommentsToList(comments){
 
-    // Creates comments list and fill it  with JSON content.
+    // Creates comments list and fill it with JSON content.
     const commentsList = document.getElementById('comments-list');
     commentsList.innerHTML = '';
     Object.entries(comments).forEach(([author, comment]) => {

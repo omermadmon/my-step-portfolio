@@ -142,5 +142,5 @@ function createListElement(htmlCode) {
 function deleteCommentFromDataStore(commentID){
    const params = new URLSearchParams();
    params.append('id', commentID);
-   fetch('/delete-task', {method: 'POST', body: params});
+   fetch('/delete-comment', {method: 'POST', body: params});
 }

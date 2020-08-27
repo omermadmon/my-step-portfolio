@@ -81,7 +81,7 @@ function getRandomFavouriteClubs() {
 /** Fetches from comments servlet and applies 
     writeCommentsToList on JSON string containing comments */ 
 function getComments() {
-    fetch('/comments').then(response => response.json())
+    fetch('/list-comments').then(response => response.json())
     .then((commentsJSON) => writeCommentsToList(commentsJSON));
 }
 
@@ -92,12 +92,26 @@ function writeCommentsToList(comments){
     // Creates comments list and fill it with JSON content.
     const commentsList = document.getElementById('comments-list');
     commentsList.innerHTML = '';
-    Object.entries(comments).forEach(([author, comment]) => {
+    Object.entries(comments).forEach(([_, fname, lname, _, text]) => {
+        var author = formatName(fname, lname);
         var listItemText = '<strong>' + author + 
-        ' said: </strong><br>' + comment;
+        ' said: </strong><br>' + text;
         commentsList.appendChild(createListElement(listItemText));
     });
 }
+
+// Convert name format: Omer Madmon => O. Madmon
+  function formatName(firstName, lastName){
+      if (firstName.equals("") && lastName.equals("")){
+          return "Anonymous";
+      } else if (firstName.equals("")){
+          return lastName;
+      } else if (lastName.equals("")){
+          return firstName;
+      } else {
+          return firstName.charAt(0) + ". " + lastName;
+      }    
+  }
 
 /** Creates an <li> element containing text. Taken from: 
 step/walkthroughs/week-3-server/examples/server-stats/

@@ -94,10 +94,25 @@ function writeCommentsToList(comments){
     const commentsList = document.getElementById('comments-list');
     commentsList.innerHTML = '';
     comments.forEach((comment) => {
+
+        // Create list element and add it to the comments list.
         var author = formatName(comment.firstName, comment.lastName);
         var listItemText = '<strong>' + author + 
         ' said: </strong><br>' + comment.text;
-        commentsList.appendChild(createListElement(listItemText));
+        var liElement = createListElement(listItemText);
+        commentsList.appendChild(liElement);
+
+        // Create delete button for this comment.
+        var deleteButtonElement = document.createElement('button');
+        deleteButtonElement.innerText = 'Delete';
+        deleteButtonElement.addEventListener('click', () => {
+
+            // Tell the server to delete the comment from datastore:
+            deleteCommentFromDataStore(comment.id);
+
+            // Remove the comment from DOM:
+            liElement.remove();
+        });
     });
 }
 
@@ -121,4 +136,9 @@ function createListElement(htmlCode) {
   const liElement = document.createElement('li');
   liElement.innerHTML = htmlCode;
   return liElement;
+}
+
+// Tell the server to delete the comment from datastore: 
+function deleteCommentFromDataStore(commentID){
+    
 }

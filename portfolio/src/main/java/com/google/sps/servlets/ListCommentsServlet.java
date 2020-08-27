@@ -54,7 +54,7 @@ public class ListCommentsServlet extends HttpServlet {
 
       Comment comment = new Comment(id, firstName, lastName,
                                     timestamp, commentText);
-      tasks.add(comment);
+      comments.add(comment);
     }
 
     // Transform comments list to JSON string.

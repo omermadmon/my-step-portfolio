@@ -113,6 +113,8 @@ function writeCommentsToList(comments){
             // Remove the comment from DOM:
             liElement.remove();
         });
+
+        liElement.appendChild(deleteButtonElement);
     });
 }
 

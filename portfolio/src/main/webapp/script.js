@@ -92,7 +92,7 @@ function writeCommentsToList(comments){
     // Creates comments list and fill it with JSON content.
     const commentsList = document.getElementById('comments-list');
     commentsList.innerHTML = '';
-    Object.entries(comments).forEach(([_, fname, lname, _, text]) => {
+    Object.entries(comments).forEach(([id, fname, lname, ts, text]) => {
         var author = formatName(fname, lname);
         var listItemText = '<strong>' + author + 
         ' said: </strong><br>' + text;
@@ -101,17 +101,17 @@ function writeCommentsToList(comments){
 }
 
 // Convert name format: Omer Madmon => O. Madmon
-  function formatName(firstName, lastName){
-      if (firstName.equals("") && lastName.equals("")){
-          return "Anonymous";
-      } else if (firstName.equals("")){
-          return lastName;
-      } else if (lastName.equals("")){
-          return firstName;
-      } else {
-          return firstName.charAt(0) + ". " + lastName;
-      }    
-  }
+function formatName(firstName, lastName){
+    if (firstName == "" && lastName == ""){
+        return "Anonymous";
+    } else if (firstName == ""){
+        return lastName;
+    } else if (lastName == ""){
+        return firstName;
+    } else {
+        return firstName.charAt(0) + ". " + lastName;
+    }    
+}
 
 /** Creates an <li> element containing text. Taken from: 
 step/walkthroughs/week-3-server/examples/server-stats/

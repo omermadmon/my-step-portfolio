@@ -112,6 +112,9 @@ function writeCommentsToList(comments){
 
             // Remove the comment from DOM:
             liElement.remove();
+
+            // Reload comments without the deleted comment:
+            getComments();
         });
 
         liElement.appendChild(deleteButtonElement);

@@ -140,5 +140,7 @@ function createListElement(htmlCode) {
 
 // Tell the server to delete the comment from datastore: 
 function deleteCommentFromDataStore(commentID){
-    
+   const params = new URLSearchParams();
+   params.append('id', commentID);
+   fetch('/delete-task', {method: 'POST', body: params});
 }

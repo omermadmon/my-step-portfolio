@@ -106,15 +106,17 @@ function writeCommentsToList(comments){
         var deleteButtonElement = document.createElement('button');
         deleteButtonElement.innerText = 'Delete';
         deleteButtonElement.addEventListener('click', () => {
+            var sure = confirm("Are you sure?")
+            if(sure) {
+                // Tell the server to delete the comment from datastore:
+                deleteCommentFromDataStore(comment.id);
 
-            // Tell the server to delete the comment from datastore:
-            deleteCommentFromDataStore(comment.id);
+                // Remove the comment from DOM:
+                liElement.remove();
 
-            // Remove the comment from DOM:
-            liElement.remove();
-
-            // Reload comments without the deleted comment:
-            getComments();
+                // Reload comments without the deleted comment:
+                getComments();
+            }
         });
 
         liElement.appendChild(deleteButtonElement);

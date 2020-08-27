@@ -32,7 +32,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /** Servlet responsible for listing tasks. */
 @WebServlet("/list-comments")
-public class ListTasksServlet extends HttpServlet {
+public class ListCommentsServlet extends HttpServlet {
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {

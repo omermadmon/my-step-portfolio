@@ -98,7 +98,7 @@ function writeCommentsToList(comments){
         // Create list element and add it to the comments list.
         var author = formatName(comment.firstName, comment.lastName);
         var listItemText = '<strong>' + author + 
-        ' said: </strong><br>' + comment.text;
+        ' said: </strong><br>' + comment.text + '<br><br>';
         var liElement = createListElement(listItemText);
         commentsList.appendChild(liElement);
 

@@ -30,6 +30,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.appengine.api.datastore.FetchOptions;
+
 /** Servlet responsible for listing tasks. */
 @WebServlet("/list-comments")
 public class ListCommentsServlet extends HttpServlet {
@@ -38,6 +40,7 @@ public class ListCommentsServlet extends HttpServlet {
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     
     // Create query for retrieving all comments.
+    int limit = Integer.parseInt(request.getParameter("limit"));
     Query query = new Query("Comment").addSort("timestamp", SortDirection.DESCENDING);
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
@@ -45,7 +48,7 @@ public class ListCommentsServlet extends HttpServlet {
 
     // Store all comments in a list.
     List<Comment> comments = new ArrayList<>();
-    for (Entity entity : results.asIterable()) {
+    for (Entity entity : results.asIterable(FetchOptions.Builder.withLimit(limit))) {
       long id = entity.getKey().getId();
       String firstName = (String) entity.getProperty("fname");
       String lastName = (String) entity.getProperty("lname");

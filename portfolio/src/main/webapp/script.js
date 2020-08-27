@@ -81,7 +81,8 @@ function getRandomFavouriteClubs() {
 /** Fetches from comments servlet and applies 
     writeCommentsToList on JSON string containing comments */ 
 function getComments() {
-    fetch('/list-comments').then(response => response.json())
+    const commentsLimit = 3; // Hard coded limit.
+    fetch('/list-comments?limit='+commentsLimit).then(response => response.json())
     .then((commentsJSON) => writeCommentsToList(commentsJSON));
 }
 

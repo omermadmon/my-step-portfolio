@@ -92,10 +92,10 @@ function writeCommentsToList(comments){
     // Creates comments list and fill it with JSON content.
     const commentsList = document.getElementById('comments-list');
     commentsList.innerHTML = '';
-    Object.entries(comments).forEach(([id, fname, lname, ts, text]) => {
-        var author = formatName(fname, lname);
+    comments.forEach((comment) => {
+        var author = formatName(comment.firstName, comment.lastName);
         var listItemText = '<strong>' + author + 
-        ' said: </strong><br>' + text;
+        ' said: </strong><br>' + comment.text;
         commentsList.appendChild(createListElement(listItemText));
     });
 }

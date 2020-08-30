@@ -80,7 +80,7 @@ function getRandomFavouriteClubs() {
 
 /** Fetch comments from servlet,
     and display them in a list on comments.html. */ 
-function getComments() {
+function displayComments() {
 
     // Get maximum number of comments to display.
     const commentsLimit = document.getElementById('limit').value;
@@ -118,7 +118,7 @@ function writeCommentsToList(comments){
                 liElement.remove();
 
                 // Reload comments without the deleted comment:
-                getComments();
+                displayComments();
             }
         });
 

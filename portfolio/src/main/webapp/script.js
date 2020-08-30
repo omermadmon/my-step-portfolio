@@ -79,9 +79,10 @@ function getRandomFavouriteClubs() {
 }
 
 /** Fetches from comments servlet and applies 
-    writeHardCodedCommentsToList on JSON string containing comments */ 
+    writeCommentsToList on JSON string containing comments */ 
 function getComments() {
-    fetch('/comments').then(response => response.json())
+    const commentsLimit = document.getElementById('limit').value;
+    fetch('/list-comments?limit='+commentsLimit).then(response => response.json())
     .then((commentsJSON) => writeCommentsToList(commentsJSON));
 }
 
@@ -89,14 +90,50 @@ function getComments() {
     and displays them in a list on comments.html*/
 function writeCommentsToList(comments){
 
-    // Creates comments list and fill it  with JSON content.
+    // Creates comments list and fill it with JSON content.
     const commentsList = document.getElementById('comments-list');
     commentsList.innerHTML = '';
-    Object.entries(comments).forEach(([author, comment]) => {
+    comments.forEach((comment) => {
+
+        // Create list element and add it to the comments list.
+        var author = formatName(comment.firstName, comment.lastName);
         var listItemText = '<strong>' + author + 
-        ' said: </strong><br>' + comment;
-        commentsList.appendChild(createListElement(listItemText));
+        ' said: </strong><br>' + comment.text + '<br><br>';
+        var liElement = createListElement(listItemText);
+        commentsList.appendChild(liElement);
+
+        // Create delete button for this comment.
+        var deleteButtonElement = document.createElement('button');
+        deleteButtonElement.innerText = 'Delete';
+        deleteButtonElement.addEventListener('click', () => {
+            var sure = confirm("Are you sure?")
+            if(sure) {
+                // Tell the server to delete the comment from datastore:
+                deleteCommentFromDataStore(comment.id);
+
+                // Remove the comment from DOM:
+                liElement.remove();
+
+                // Reload comments without the deleted comment:
+                getComments();
+            }
+        });
+
+        liElement.appendChild(deleteButtonElement);
     });
+}
+
+// Convert name format: Omer Madmon => O. Madmon
+function formatName(firstName, lastName){
+    if (firstName == "" && lastName == ""){
+        return "Anonymous";
+    } else if (firstName == ""){
+        return lastName;
+    } else if (lastName == ""){
+        return firstName;
+    } else {
+        return firstName.charAt(0) + ". " + lastName;
+    }    
 }
 
 /** Creates an <li> element containing text. Taken from: 
@@ -106,4 +143,11 @@ function createListElement(htmlCode) {
   const liElement = document.createElement('li');
   liElement.innerHTML = htmlCode;
   return liElement;
+}
+
+// Tell the server to delete the comment from datastore: 
+function deleteCommentFromDataStore(commentID){
+   const params = new URLSearchParams();
+   params.append('id', commentID);
+   fetch('/delete-comment', {method: 'POST', body: params});
 }

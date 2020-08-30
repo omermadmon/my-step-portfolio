@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
   </head>
-  <body onload="getComments()">
+  <body onload="getComments()" onchange="getComments()"> 
       
     <div id="topnav">
         <a href="https://github.com/omermadmon" target="_blank">GitHub</a>
@@ -17,16 +17,16 @@
     
     <div id="comments">
       <h1>Your Comments</h1>
-      <p>This page displays visitors' comments, and in the
-          near future these comments will be stored in one of GCP
-          data store services.
-      </p>
+      <form>
+        <label for="limit">Choose number of latest comments to view: </label>
+        <input type="number" id="limit" name="limit" min="1" max="10" value="5"><br><br>
+      </form>
       <ul id="comments-list"></ul>
     </div>
 
     <div id="comments-form">
         <h2>Got something to say?</h2>
-        <form action="/comments" method="POST">
+        <form action="/new-comment" method="POST">
             <label for="fname">First name:</label><br>
             <input type="text" id="fname" name="fname" value=""><br><br>
             <label for="lname">Last name:</label><br>

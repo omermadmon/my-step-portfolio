@@ -78,6 +78,12 @@ function displayAllAchievements(){
     }
 }
 
+/** Load all components in achievements page. */
+function initAchievementsPage(){
+    displayAllAchievements();
+    createMap();
+}
+
 /** Favourite Clubs Generator. */
 function getRandomFavouriteClubs() {
   fetch('/data').then(response => response.text()).then((club) => {

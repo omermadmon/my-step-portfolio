@@ -35,6 +35,16 @@ var achievements =
                cup, and also won Athletico Madrid in the European Champions Cup!'
     }; 
 
+// Create a key-value object for storing clubs geo-data.
+var geo =
+    {
+      'mhfc' : { "latitude": 32.794, "longitude": 34.9896 },
+      'juve' : { "latitude": 45.0703, "longitude": 7.6869 },
+      'tott' : { "latitude": 51.5074, "longitude": 0.1278 },
+      'inter' : { "latitude": 45.4642, "longitude": 9.19 },
+      'hrg' : { "latitude": 32.0684, "longitude": 34.8248 }
+    }; 
+
 /** Achievements Generator. */
 function addRandomAchievement() {
 
@@ -55,10 +65,35 @@ function addRandomAchievement() {
 
 /** Creates a map and adds it to the page. */
 function createMap() {
+
+  // Init map.
   const map = new google.maps.Map(
       document.getElementById('map'),
       {center: {lat: 45, lng: 0}, zoom: 3.7});
-}
+
+  // Create markers foreach achievements.
+  Object.entries(geo).forEach(([club, coordinates]) => {
+        
+        // Create content window.
+        const infowindow = new google.maps.InfoWindow({
+            content: "<img src=images/" + club + 
+                     "-logo.png alt='club-logo' class='club-icon'>" 
+                     + "<br><br>" + achievements[club]
+        });
+
+        // Create marker.
+        const clubMarker = new google.maps.Marker({
+        position: {lat: coordinates.latitude, lng: coordinates.longitude},
+        map: map,
+        title: club
+        });
+
+        // Attach content window to marker.
+        clubMarker.addListener("click", () => {
+        infowindow.open(map, clubMarker);
+        });
+    });
+}  
 
 /** Display all achievements in a table. */
 function displayAllAchievements(){

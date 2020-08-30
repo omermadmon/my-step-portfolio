@@ -82,6 +82,11 @@ img {
   margin-top: 25px;
 }
 
+.club-icon {
+  width: 54px;
+  margin-top: 25px;
+}
+
 button {
   background-color: lightslategrey;
   color: azure;

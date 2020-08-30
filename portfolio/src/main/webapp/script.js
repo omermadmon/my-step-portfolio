@@ -35,7 +35,7 @@ var achievements =
                cup, and also won Athletico Madrid in the European Champions Cup!'
     }; 
 
-// Achievements Generator.
+/** Achievements Generator. */
 function addRandomAchievement() {
 
   // Pick a random club.
@@ -53,7 +53,7 @@ function addRandomAchievement() {
   document.getElementById('achievement-container').innerText = achievement;
 }
 
-// Write all achievements to a table.
+/** Display all achievements in a table. */
 function displayAllAchievements(){
     
     // Get all clubs.
@@ -71,23 +71,26 @@ function displayAllAchievements(){
     }
 }
 
-// Favourite Clubs Generator.
+/** Favourite Clubs Generator. */
 function getRandomFavouriteClubs() {
   fetch('/data').then(response => response.text()).then((club) => {
     document.getElementById('favourite-club-container').innerText = club;
   });
 }
 
-/** Fetches from comments servlet and applies 
-    writeCommentsToList on JSON string containing comments */ 
+/** Fetch comments from servlet,
+    and display them in a list on comments.html. */ 
 function getComments() {
+
+    // Get maximum number of comments to display.
     const commentsLimit = document.getElementById('limit').value;
+
     fetch('/list-comments?limit='+commentsLimit).then(response => response.json())
     .then((commentsJSON) => writeCommentsToList(commentsJSON));
 }
 
-/** Gets comments (in JSON string format),
-    and displays them in a list on comments.html*/
+/** Get comments (in JSON string format),
+    and display them in a list on comments.html. */
 function writeCommentsToList(comments){
 
     // Creates comments list and fill it with JSON content.
@@ -123,7 +126,7 @@ function writeCommentsToList(comments){
     });
 }
 
-// Convert name format: Omer Madmon => O. Madmon
+/** Convert name format: Omer Madmon => O. Madmon. */
 function formatName(firstName, lastName){
     if (firstName == "" && lastName == ""){
         return "Anonymous";
@@ -136,16 +139,14 @@ function formatName(firstName, lastName){
     }    
 }
 
-/** Creates an <li> element containing text. Taken from: 
-step/walkthroughs/week-3-server/examples/server-stats/
-    src/main/webapp/script.js */
+/** Create a list element for a comment. */
 function createListElement(htmlCode) {
   const liElement = document.createElement('li');
   liElement.innerHTML = htmlCode;
   return liElement;
 }
 
-// Tell the server to delete the comment from datastore: 
+/** Tell the server to delete a comment from datastore. */
 function deleteCommentFromDataStore(commentID){
    const params = new URLSearchParams();
    params.append('id', commentID);

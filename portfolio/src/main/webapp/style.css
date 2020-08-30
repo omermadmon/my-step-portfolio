@@ -1,7 +1,10 @@
 #map {
-  border: thin solid black;
+  border: thin solid azure;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 25px;
   height: 500px;
-  width: 500px;
+  width: 650px;
 }
 
 #content {

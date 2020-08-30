@@ -46,7 +46,7 @@ public class ListAchievementsServlet extends HttpServlet {
 
     // Store all achievements in a list.
     List<Achievement> achievements = new ArrayList<>();
-    for (Entity entity : results.asIterable(FetchOptions.Builder)) {
+    for (Entity entity : results.asIterable()) {
       long id = entity.getKey().getId();
       String title = (String) entity.getProperty("title");
       String club = (String) entity.getProperty("club");

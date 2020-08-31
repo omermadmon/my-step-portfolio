@@ -13,7 +13,14 @@
 // limitations under the License.
 
 
-// Create a key-value object for storing clubs achievements.
+// ---------------------------------------------------
+
+
+
+// ---------------------------------------------------
+
+
+// [TODO: REMOVE] Create a key-value object for storing clubs achievements.
 var achievements =
     {
       'mhfc' : 'In FM2013, I led Maccabi Haifa to the \
@@ -35,7 +42,7 @@ var achievements =
                cup, and also won Athletico Madrid in the European Champions Cup!'
     }; 
 
-// Create a key-value object for storing clubs geo-data.
+// [TODO: REMOVE] Create a key-value object for storing clubs geo-data.
 var geo =
     {
       'mhfc' : { "latitude": 32.794, "longitude": 34.9896 },
@@ -45,7 +52,7 @@ var geo =
       'hrg' : { "latitude": 32.0684, "longitude": 34.8248 }
     }; 
 
-/** Achievements Generator. */
+/** [TODO: UPDATE] Achievements Generator. */
 function addRandomAchievement() {
 
   // Pick a random club.
@@ -63,7 +70,37 @@ function addRandomAchievement() {
   document.getElementById('achievement-container').innerText = achievement;
 }
 
-/** Creates a map and adds it to the page. */
+/** Fetch achievements from servlet,
+    and display them in a table on achievements.html. */ 
+function displayAchievements() {
+
+    // [TODO: REMOVE] Add dummy achievements.
+    // const params = new URLSearchParams();
+    // params.append('text', "hapoel haifa does not exists!");
+    // fetch('/new-achievement', {method: 'POST', body: params});
+
+    fetch("/achievements")
+    .then(response => response.json())
+    .then((achievementsJSON) => writeAchievementsToTable(achievementsJSON));
+}
+
+/** Get achievements (in JSON string format),
+    and display them in a table on achievements.html. */
+function writeAchievementsToTable(achievementsJSON) {
+ 
+    // Create a table for holding achievements and clubs' names.
+    var table = document.getElementById("achievements-table");
+
+    // Foreach achievement insert a new row.
+    achievementsJSON.forEach((achievement) => {
+        var row = table.insertRow(-1);
+        var imgUrl = 'images/' + achievement.club + '-logo.png';
+        row.insertCell(0).innerHTML = "<img src=" + imgUrl + " alt='club-logo'>";
+        row.insertCell(1).innerHTML = achievement.text;
+    });
+}
+
+/** Create a map and adds it to the page. */
 function createMap() {
 
   // Init map.
@@ -72,20 +109,32 @@ function createMap() {
       {center: {lat: 45, lng: 0}, zoom: 3.7});
 
   // Create markers foreach achievements.
-  Object.entries(geo).forEach(([club, coordinates]) => {
+  fetch("/achievements")
+    .then(response => response.json())
+    .then((achievementsJSON) => createMarkers(achievementsJSON, map));
+}  
+
+/** Get achievements as JSON string and the map,
+    and display all achievements on the map as markers.*/
+function createMarkers(achievementsJSON, map) {
+    
+  achievementsJSON.forEach((achievement) => {
         
         // Create content window.
         const infowindow = new google.maps.InfoWindow({
-            content: "<img src=images/" + club + 
+            content: "<img src=images/" + achievement.club + 
                      "-logo.png alt='club-logo' class='club-icon'>" 
-                     + "<br><br>" + achievements[club]
+                     + "<br><br>" + achievement.text
         });
+
+        // parse coordinates.
+        var coordinates = JSON.parse(achievement.geo);
 
         // Create marker.
         const clubMarker = new google.maps.Marker({
         position: {lat: coordinates.latitude, lng: coordinates.longitude},
         map: map,
-        title: club
+        title: achievement.club
         });
 
         // Attach content window to marker.
@@ -93,9 +142,10 @@ function createMap() {
         infowindow.open(map, clubMarker);
         });
     });
-}  
 
-/** Display all achievements in a table. */
+}
+
+/** [TODO: REMOVE] Display all achievements in a table. */
 function displayAllAchievements(){
     
     // Get all clubs.
@@ -115,7 +165,7 @@ function displayAllAchievements(){
 
 /** Load all components in achievements page. */
 function initAchievementsPage(){
-    displayAllAchievements();
+    displayAchievements();
     createMap();
 }
 

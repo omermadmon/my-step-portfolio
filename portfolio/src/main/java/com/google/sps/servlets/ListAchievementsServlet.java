@@ -32,7 +32,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /** Servlet responsible for listing achievements to be displayed on achievements page. */
-@WebServlet("/list-achievements")
+@WebServlet("/achievements")
 public class ListAchievementsServlet extends HttpServlet {
 
   @Override

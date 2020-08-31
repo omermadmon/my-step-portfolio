@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/** Servlet responsible for creating new dummy achievementS and add them to datastore (for testing). */
+/** [TODO: REMOVE] Servlet responsible for creating new dummy achievementS and add them to datastore (for testing). */
 @WebServlet("/new-achievement")
 public class NewAchievementServlet extends HttpServlet {
 

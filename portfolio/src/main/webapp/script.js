@@ -13,15 +13,11 @@
 // limitations under the License.
 
 
-// ---------------------------------------------------
+/** Achievements Generator. */
+function addRandomAchievement() {
 
-
-
-// ---------------------------------------------------
-
-
-// [TODO: REMOVE] Create a key-value object for storing clubs achievements.
-var achievements =
+  // Create a key-value object for some hard coded clubs achievements.
+  var achievements =
     {
       'mhfc' : 'In FM2013, I led Maccabi Haifa to the \
                 European Champions Cup semi-final!',
@@ -41,19 +37,6 @@ var achievements =
                have qualified to the first israeli leauge, won the israeli national \
                cup, and also won Athletico Madrid in the European Champions Cup!'
     }; 
-
-// [TODO: REMOVE] Create a key-value object for storing clubs geo-data.
-var geo =
-    {
-      'mhfc' : { "latitude": 32.794, "longitude": 34.9896 },
-      'juve' : { "latitude": 45.0703, "longitude": 7.6869 },
-      'tott' : { "latitude": 51.5074, "longitude": 0.1278 },
-      'inter' : { "latitude": 45.4642, "longitude": 9.19 },
-      'hrg' : { "latitude": 32.0684, "longitude": 34.8248 }
-    }; 
-
-/** [TODO: UPDATE] Achievements Generator. */
-function addRandomAchievement() {
 
   // Pick a random club.
   const clubs = Object.keys(achievements);
@@ -143,24 +126,6 @@ function createMarkers(achievementsJSON, map) {
         });
     });
 
-}
-
-/** [TODO: REMOVE] Display all achievements in a table. */
-function displayAllAchievements(){
-    
-    // Get all clubs.
-    const clubs = Object.keys(achievements);    
-
-    // Create a table for holding achievements and clubs' names.
-    var table = document.getElementById("achievements-table");
-
-    // Foreach club insert a new row with the corresponding achievement.
-    for(let i = 0; i < clubs.length; ++i){
-        var row = table.insertRow(-1);
-        var imgUrl = 'images/' + clubs[i] + '-logo.png';
-        row.insertCell(0).innerHTML = "<img src=" + imgUrl + " alt='club-logo'>";
-        row.insertCell(1).innerHTML = achievements[clubs[i]];
-    }
 }
 
 /** Load all components in achievements page. */

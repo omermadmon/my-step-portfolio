@@ -58,7 +58,7 @@ public class ListAchievementsServlet extends HttpServlet {
       achievements.add(achievement);
     }
 
-    // Transform comments list to JSON string.
+    // Transform achievements list to JSON string.
     Gson gson = new Gson();
     String json = gson.toJson(achievements);
 

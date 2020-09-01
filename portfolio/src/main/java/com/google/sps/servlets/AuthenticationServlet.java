@@ -34,10 +34,11 @@ public class AuthenticationServlet extends HttpServlet {
     UserService userService = UserServiceFactory.getUserService();
     if (userService.isUserLoggedIn()) {
       String userEmail = userService.getCurrentUser().getEmail();
+      String userNickname = userService.getCurrentUser().getNickname();
       String urlToRedirectToAfterUserLogsOut = "/comments.html";
       String logoutUrl = userService.createLogoutURL(urlToRedirectToAfterUserLogsOut);
 
-      response.getWriter().println("<p>Hello " + userEmail + "!</p>");
+      response.getWriter().println("<p>Hello " + userNickname + "!</p>");
       response.getWriter().println("<p>Logout <a href=\"" + logoutUrl + "\">here</a>.</p>");
     } else {
       String urlToRedirectToAfterUserLogsIn = "/comments.html";

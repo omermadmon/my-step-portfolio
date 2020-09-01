@@ -103,7 +103,7 @@ function createMarkers(achievementsJSON, map) {
 }
 
 /** Load all components in achievements page. */
-function initAchievementsPage(){
+function initAchievementsPage() {
     displayAchievements();
     createMap();
 }
@@ -112,6 +112,21 @@ function initAchievementsPage(){
 function getRandomFavouriteClubs() {
   fetch('/data').then(response => response.text()).then((club) => {
     document.getElementById('favourite-club-container').innerText = club;
+  });
+}
+
+/** Load all components in comments page. */
+function initCommentsPage() {
+    userAuthentication();
+    displayComments();
+}
+
+/** Fetch autentication log-in/log-out url. */
+function userAuthentication() {
+    fetch('/authentication')
+    .then(response => response.text())
+    .then((authenticationMessage) => {
+    document.getElementById('authentication-message').innerHTML = authenticationMessage;
   });
 }
 
@@ -128,7 +143,7 @@ function displayComments() {
 
 /** Get comments (in JSON string format),
     and display them in a list on comments.html. */
-function writeCommentsToList(comments){
+function writeCommentsToList(comments) {
 
     // Creates comments list and fill it with JSON content.
     const commentsList = document.getElementById('comments-list');
@@ -164,7 +179,7 @@ function writeCommentsToList(comments){
 }
 
 /** Convert name format: Omer Madmon => O. Madmon. */
-function formatName(firstName, lastName){
+function formatName(firstName, lastName) {
     if (firstName == "" && lastName == ""){
         return "Anonymous";
     } else if (firstName == ""){
@@ -184,7 +199,7 @@ function createListElement(htmlCode) {
 }
 
 /** Tell the server to delete a comment from datastore. */
-function deleteCommentFromDataStore(commentID){
+function deleteCommentFromDataStore(commentID) {
    const params = new URLSearchParams();
    params.append('id', commentID);
    fetch('/delete-comment', {method: 'POST', body: params});

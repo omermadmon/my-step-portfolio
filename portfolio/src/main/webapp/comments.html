@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
   </head>
-  <body onload="displayComments()" onchange="displayComments()"> 
+  <body onload="initCommentsPage()" onchange="displayComments()"> 
       
     <div id="topnav">
         <a href="https://github.com/omermadmon" target="_blank">GitHub</a>
@@ -14,6 +14,8 @@
         <a href="https://twitter.com/OmerMadmon" target="_blank">Twitter</a>
         <a href="mailto:omermadmon@gmail.com" target="_blank">e-mail</a>
     </div>
+
+    <div id="authentication-message"></div>
     
     <div id="comments">
       <h1>Your Comments</h1>

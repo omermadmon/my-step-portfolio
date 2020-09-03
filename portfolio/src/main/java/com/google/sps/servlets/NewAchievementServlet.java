@@ -17,6 +17,7 @@ package com.google.sps.servlets;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
 import com.google.appengine.api.datastore.Query.FilterPredicate;
@@ -34,10 +35,10 @@ public class NewAchievementServlet extends HttpServlet {
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
+    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+    
     // Count existing achievement.
     Query query = new Query("Achievement");
-
-    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
     
     // Create new achievement entity.
@@ -51,7 +52,6 @@ public class NewAchievementServlet extends HttpServlet {
     achievementEntity.setProperty("serial", serial);
 
     // Add achievement to datastore.
-    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     datastore.put(achievementEntity);
 
     response.sendRedirect("/achievements.html");

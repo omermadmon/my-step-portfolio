@@ -20,7 +20,7 @@ function generateRandomAchievement() {
     .then(response => response.json())
     .then((achievement) => {
 
-        if(achievement == null) {
+        if (achievement == null) {
             document.getElementById('achievement-container').innerText = "Sorry, there are no achievements at the moment :(";
         }
         

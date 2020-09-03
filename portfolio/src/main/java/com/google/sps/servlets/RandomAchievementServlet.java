@@ -61,7 +61,7 @@ public class RandomAchievementServlet extends HttpServlet {
         'serial' property is not a key, but is unique. */
     Entity entity = pq.asSingleEntity();
 
-    if(entity != null) {
+    if (entity != null) {
         // Create an achievement from the random entity.
         long id = entity.getKey().getId();
         String title = (String) entity.getProperty("title");

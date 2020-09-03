@@ -22,7 +22,7 @@ import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
 import com.google.appengine.api.datastore.FetchOptions;
 import com.google.gson.Gson;
-import com.google.sps.data.Comment;
+import com.google.sps.data.Achievement;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,37 +31,36 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/** Servlet responsible for listing comments to be displayed on comments page. */
-@WebServlet("/list-comments")
-public class ListCommentsServlet extends HttpServlet {
+/** Servlet responsible for listing achievements to be displayed on achievements page. */
+@WebServlet("/achievements")
+public class ListAchievementsServlet extends HttpServlet {
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     
-    // Create query for retrieving all comments.
-    int limit = Integer.parseInt(request.getParameter("limit"));
-    Query query = new Query("Comment").addSort("timestamp", SortDirection.DESCENDING);
+    // Create query for retrieving all achievements.
+    Query query = new Query("Achievement");
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
 
-    // Store all comments in a list.
-    List<Comment> comments = new ArrayList<>();
-    for (Entity entity : results.asIterable(FetchOptions.Builder.withLimit(limit))) {
+    // Store all achievements in a list.
+    List<Achievement> achievements = new ArrayList<>();
+    for (Entity entity : results.asIterable()) {
       long id = entity.getKey().getId();
-      String firstName = (String) entity.getProperty("fname");
-      String lastName = (String) entity.getProperty("lname");
-      long timestamp = (long) entity.getProperty("timestamp");
-      String commentText = (String) entity.getProperty("text");
+      String title = (String) entity.getProperty("title");
+      String club = (String) entity.getProperty("club");
+      String geo = (String) entity.getProperty("geo");
+      String text = (String) entity.getProperty("text");
 
-      Comment comment = new Comment(id, firstName, lastName,
-                                    timestamp, commentText);
-      comments.add(comment);
+      Achievement achievement = new Achievement(id, title, club,
+                                    geo, text);
+      achievements.add(achievement);
     }
 
-    // Transform comments list to JSON string.
+    // Transform achievements list to JSON string.
     Gson gson = new Gson();
-    String json = gson.toJson(comments);
+    String json = gson.toJson(achievements);
 
     // Send the JSON as the response
     response.setContentType("application/json;");

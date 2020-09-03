@@ -14,21 +14,21 @@
 
 package com.google.sps.data;
 
-/** Class responsible for representing users' comments on the website. */
-public final class Comment {
+/** Class responsible for representing my FM achievements. */
+public final class Achievement {
 
   private final long id;
-  private final String firstName;
-  private final String lastName;
-  private final long timestamp;
+  private final String title;
+  private final String club;
+  private final String geo;
   private final String text;
 
-  public Comment(long id, String firstName, String lastName, 
-                 long timestamp, String text) {
+  public Achievement(long id, String title, String club, 
+                 String geo, String text) {
     this.id = id;
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.timestamp = timestamp;
+    this.title = title;
+    this.club = club;
+    this.geo = geo;
     this.text = text;
   }
 }

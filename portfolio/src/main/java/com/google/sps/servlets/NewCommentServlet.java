@@ -22,8 +22,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
 
-/** Servlet responsible for creating new tasks. */
+/** Servlet responsible for creating new comments and add them to datastore. */
 @WebServlet("/new-comment")
 public class NewCommentServlet extends HttpServlet {
 
@@ -35,6 +37,13 @@ public class NewCommentServlet extends HttpServlet {
     String lastName = request.getParameter("lname");
     long timestamp = System.currentTimeMillis();
     String commentText = request.getParameter("comment-text");
+
+    // Collect email.
+    String email = null;
+    UserService userService = UserServiceFactory.getUserService();
+    if (userService.isUserLoggedIn()) {
+        email = userService.getCurrentUser().getEmail();
+    }
     
     // Create new comment entity.
     Entity commentEntity = new Entity("Comment");
@@ -42,6 +51,7 @@ public class NewCommentServlet extends HttpServlet {
     commentEntity.setProperty("lname", lastName);
     commentEntity.setProperty("timestamp", timestamp);
     commentEntity.setProperty("text", commentText);
+    commentEntity.setProperty("email", email);
 
     // Add comment to datastore.
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();

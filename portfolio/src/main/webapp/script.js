@@ -13,82 +13,144 @@
 // limitations under the License.
 
 
-// Create a key-value object for storing clubs achievements.
-var achievements =
-    {
-      'mhfc' : 'In FM2013, I led Maccabi Haifa to the \
-                European Champions Cup semi-final!',
-      'juve' : 'The first time I was playing FM was back in 2006, \
-                when Juventus was one of the greatest teams in europe. \
-                \nLeading this club to the European Champions Cup final \
-                was my first FM experience.',
-      'tott' : 'Tottenham Hotspur is one of the many great football clubs \
-                of the coty of London, but they never managed to be \
-                considered as the greatest club of the city. My FM challenge \
-                was changing this fact...',
-      'inter' : 'After 4 years of managing Hapoel Ramat-Gan with huge success, \
-                 I got a (virtual) offer from Inter. \nIn half a season I \
-                 managed to raise from 10th place all the way up to the \
-                 honorable 2nd place in the italian football league, the Seria A.',
-      'hrg' : 'This one is my favourite one!\nIn 4 years (in the game, of course) I \
-               have qualified to the first israeli leauge, won the israeli national \
-               cup, and also won Athletico Madrid in the European Champions Cup!'
-    }; 
+/** Achievements Generator. */
+function generateRandomAchievement() {
 
-// Achievements Generator.
-function addRandomAchievement() {
+  fetch("/random-achievement")
+    .then(response => response.json())
+    .then((achievement) => {
 
-  // Pick a random club.
-  const clubs = Object.keys(achievements);
-  const club = clubs[Math.floor(Math.random() * clubs.length)];
-  const imgUrl = 'images/' + club + '-logo.png';
+        if (achievement == null) {
+            document.getElementById('achievement-container').innerText = "Sorry, there are no achievements at the moment :(";
+        }
+        
+        else {
+            const club = achievement.club;
+            const text = achievement.text;
+            const imgUrl = 'images/' + club + '-logo.png';
 
-  // Get the corresponding achievement text.
-  const achievement = achievements[club];
+            // Add image to the page.
+            document.getElementById('achievement-image').src = imgUrl;
 
-  // Add image to the page.
-  document.getElementById('achievement-image').src = imgUrl;
+            // Add text to the page.
+            document.getElementById('achievement-container').innerText = text;
+        }
+        
 
-  // Add text to the page.
-  document.getElementById('achievement-container').innerText = achievement;
+    });
 }
 
-// Write all achievements to a table.
-function displayAllAchievements(){
-    
-    // Get all clubs.
-    const clubs = Object.keys(achievements);    
+/** Fetch achievements from servlet,
+    and display them in a table on achievements.html. */ 
+function displayAchievements() {
+    fetch("/achievements")
+    .then(response => response.json())
+    .then((achievementsJSON) => writeAchievementsToTable(achievementsJSON));
+}
 
+/** Get achievements (in JSON string format),
+    and display them in a table on achievements.html. */
+function writeAchievementsToTable(achievementsJSON) {
+ 
     // Create a table for holding achievements and clubs' names.
     var table = document.getElementById("achievements-table");
 
-    // Foreach club insert a new row with the corresponding achievement.
-    for(let i = 0; i < clubs.length; ++i){
+    // Foreach achievement insert a new row.
+    achievementsJSON.forEach((achievement) => {
         var row = table.insertRow(-1);
-        var imgUrl = 'images/' + clubs[i] + '-logo.png';
+        var imgUrl = 'images/' + achievement.club + '-logo.png';
         row.insertCell(0).innerHTML = "<img src=" + imgUrl + " alt='club-logo'>";
-        row.insertCell(1).innerHTML = achievements[clubs[i]];
-    }
+        row.insertCell(1).innerHTML = achievement.text;
+    });
 }
 
-// Favourite Clubs Generator.
+/** Create a map and adds it to the page. */
+function createMap() {
+
+  // Init map.
+  const map = new google.maps.Map(
+      document.getElementById('map'),
+      {center: {lat: 45, lng: 0}, zoom: 3.7});
+
+  // Create markers foreach achievements.
+  fetch("/achievements")
+    .then(response => response.json())
+    .then((achievementsJSON) => createMarkers(achievementsJSON, map));
+}  
+
+/** Get achievements as JSON string and the map,
+    and display all achievements on the map as markers.*/
+function createMarkers(achievementsJSON, map) {
+    
+  achievementsJSON.forEach((achievement) => {
+        
+        // Create content window.
+        const infowindow = new google.maps.InfoWindow({
+            content: "<img src=images/" + achievement.club + 
+                     "-logo.png alt='club-logo' class='club-icon'>" 
+                     + "<br><br>" + achievement.text
+        });
+
+        // parse coordinates.
+        var coordinates = JSON.parse(achievement.geo);
+
+        // Create marker.
+        const clubMarker = new google.maps.Marker({
+        position: {lat: coordinates.latitude, lng: coordinates.longitude},
+        map: map,
+        title: achievement.club
+        });
+
+        // Attach content window to marker.
+        clubMarker.addListener("click", () => {
+        infowindow.open(map, clubMarker);
+        });
+    });
+
+}
+
+/** Load all components in achievements page. */
+function initAchievementsPage() {
+    displayAchievements();
+    createMap();
+}
+
+/** Favourite Clubs Generator. */
 function getRandomFavouriteClubs() {
   fetch('/data').then(response => response.text()).then((club) => {
     document.getElementById('favourite-club-container').innerText = club;
   });
 }
 
-/** Fetches from comments servlet and applies 
-    writeCommentsToList on JSON string containing comments */ 
-function getComments() {
+/** Load all components in comments page. */
+function initCommentsPage() {
+    userAuthentication();
+    displayComments();
+}
+
+/** Fetch autentication log-in/log-out url. */
+function userAuthentication() {
+    fetch('/authentication')
+    .then(response => response.text())
+    .then((authenticationMessage) => {
+    document.getElementById('authentication-message').innerHTML = authenticationMessage;
+  });
+}
+
+/** Fetch comments from servlet,
+    and display them in a list on comments.html. */ 
+function displayComments() {
+
+    // Get maximum number of comments to display.
     const commentsLimit = document.getElementById('limit').value;
+
     fetch('/list-comments?limit='+commentsLimit).then(response => response.json())
     .then((commentsJSON) => writeCommentsToList(commentsJSON));
 }
 
-/** Gets comments (in JSON string format),
-    and displays them in a list on comments.html*/
-function writeCommentsToList(comments){
+/** Get comments (in JSON string format),
+    and display them in a list on comments.html. */
+function writeCommentsToList(comments) {
 
     // Creates comments list and fill it with JSON content.
     const commentsList = document.getElementById('comments-list');
@@ -115,7 +177,7 @@ function writeCommentsToList(comments){
                 liElement.remove();
 
                 // Reload comments without the deleted comment:
-                getComments();
+                displayComments();
             }
         });
 
@@ -123,8 +185,8 @@ function writeCommentsToList(comments){
     });
 }
 
-// Convert name format: Omer Madmon => O. Madmon
-function formatName(firstName, lastName){
+/** Convert name format: Omer Madmon => O. Madmon. */
+function formatName(firstName, lastName) {
     if (firstName == "" && lastName == ""){
         return "Anonymous";
     } else if (firstName == ""){
@@ -136,17 +198,15 @@ function formatName(firstName, lastName){
     }    
 }
 
-/** Creates an <li> element containing text. Taken from: 
-step/walkthroughs/week-3-server/examples/server-stats/
-    src/main/webapp/script.js */
+/** Create a list element for a comment. */
 function createListElement(htmlCode) {
   const liElement = document.createElement('li');
   liElement.innerHTML = htmlCode;
   return liElement;
 }
 
-// Tell the server to delete the comment from datastore: 
-function deleteCommentFromDataStore(commentID){
+/** Tell the server to delete a comment from datastore. */
+function deleteCommentFromDataStore(commentID) {
    const params = new URLSearchParams();
    params.append('id', commentID);
    fetch('/delete-comment', {method: 'POST', body: params});

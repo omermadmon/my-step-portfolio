@@ -20,15 +20,22 @@ function generateRandomAchievement() {
     .then(response => response.json())
     .then((achievement) => {
 
-        const club = achievement.club;
-        const text = achievement.text;
-        const imgUrl = 'images/' + club + '-logo.png';
+        if(achievement == null) {
+            document.getElementById('achievement-container').innerText = "Sorry, there are no achievements at the moment :(";
+        }
+        
+        else {
+            const club = achievement.club;
+            const text = achievement.text;
+            const imgUrl = 'images/' + club + '-logo.png';
 
-        // Add image to the page.
-        document.getElementById('achievement-image').src = imgUrl;
+            // Add image to the page.
+            document.getElementById('achievement-image').src = imgUrl;
 
-        // Add text to the page.
-        document.getElementById('achievement-container').innerText = text;
+            // Add text to the page.
+            document.getElementById('achievement-container').innerText = text;
+        }
+        
 
     });
 }

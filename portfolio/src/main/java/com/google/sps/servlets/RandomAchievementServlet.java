@@ -20,6 +20,8 @@ import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
+import com.google.appengine.api.datastore.Query.FilterPredicate;
+import com.google.appengine.api.datastore.Query.FilterOperator;
 import com.google.appengine.api.datastore.FetchOptions;
 import com.google.gson.Gson;
 import com.google.sps.data.Achievement;
@@ -39,28 +41,35 @@ public class RandomAchievementServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     
-    // Create query for retrieving all achievements.
+    // Create query for counting all achievements.
     Query query = new Query("Achievement");
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
 
-    // Store all achievements in a list.
-    List<Achievement> achievements = new ArrayList<>();
-    for (Entity entity : results.asIterable()) {
-      long id = entity.getKey().getId();
-      String title = (String) entity.getProperty("title");
-      String club = (String) entity.getProperty("club");
-      String geo = (String) entity.getProperty("geo");
-      String text = (String) entity.getProperty("text");
+    // Generate random achievement serial.
+    int randomAchievementSerial = (int) (Math.random() * results.countEntities());
 
-      Achievement achievement = new Achievement(id, title, club,
+    // Create query for retrieving achievement from serial.
+    Query randomAchievementQuery = new Query("Achievement")
+                  .setFilter(new FilterPredicate("serial", FilterOperator.EQUAL, randomAchievementSerial));
+
+    // Prepare query.
+    PreparedQuery pq = datastore.prepare(randomAchievementQuery);
+    
+    /** Return the first result found in the index that matches the query. 
+        'serial' property is not a key, but is unique. */
+    Entity entity = pq.asSingleEntity();
+
+    // Create an achievement from the random entity.
+    long id = entity.getKey().getId();
+    String title = (String) entity.getProperty("title");
+    String club = (String) entity.getProperty("club");
+    String geo = (String) entity.getProperty("geo");
+    String text = (String) entity.getProperty("text");
+
+    Achievement randomAchievement = new Achievement(id, title, club,
                                     geo, text);
-      achievements.add(achievement);
-    }
-
-    // Generate random achievement.
-    Achievement randomAchievement = achievements.get((int) (Math.random() * achievements.size())); 
 
     // Transform comments list to JSON string.
     Gson gson = new Gson();

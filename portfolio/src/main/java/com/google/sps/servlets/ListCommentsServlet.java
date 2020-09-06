@@ -34,6 +34,7 @@ import javax.servlet.http.HttpServletResponse;
 /** Servlet responsible for listing comments to be displayed on comments page. */
 @WebServlet("/list-comments")
 public class ListCommentsServlet extends HttpServlet {
+  private DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -41,8 +42,6 @@ public class ListCommentsServlet extends HttpServlet {
     // Create query for retrieving all comments.
     int limit = Integer.parseInt(request.getParameter("limit"));
     Query query = new Query("Comment").addSort("timestamp", SortDirection.DESCENDING);
-
-    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
 
     // Store all comments in a list.

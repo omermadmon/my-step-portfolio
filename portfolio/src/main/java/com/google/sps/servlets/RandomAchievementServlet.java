@@ -37,14 +37,13 @@ import javax.servlet.http.HttpServletResponse;
 /** Servlet responsible for retrieving a random achievement to be displayed on index page. */
 @WebServlet("/random-achievement")
 public class RandomAchievementServlet extends HttpServlet {
+  private DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     
     // Create query for counting all achievements.
     Query query = new Query("Achievement");
-
-    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
 
     // Generate random achievement serial.

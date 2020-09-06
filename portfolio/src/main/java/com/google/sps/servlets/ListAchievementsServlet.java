@@ -34,14 +34,13 @@ import javax.servlet.http.HttpServletResponse;
 /** Servlet responsible for listing achievements to be displayed on achievements page. */
 @WebServlet("/achievements")
 public class ListAchievementsServlet extends HttpServlet {
+  private DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     
     // Create query for retrieving all achievements.
     Query query = new Query("Achievement");
-
-    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
 
     // Store all achievements in a list.

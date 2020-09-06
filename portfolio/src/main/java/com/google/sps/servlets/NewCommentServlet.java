@@ -28,6 +28,7 @@ import com.google.appengine.api.users.UserServiceFactory;
 /** Servlet responsible for creating new comments and add them to datastore. */
 @WebServlet("/new-comment")
 public class NewCommentServlet extends HttpServlet {
+  private DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -54,7 +55,6 @@ public class NewCommentServlet extends HttpServlet {
     commentEntity.setProperty("email", email);
 
     // Add comment to datastore.
-    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     datastore.put(commentEntity);
 
     response.sendRedirect("/comments.html");

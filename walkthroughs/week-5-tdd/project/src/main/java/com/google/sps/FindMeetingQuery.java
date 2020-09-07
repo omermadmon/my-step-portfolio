@@ -27,8 +27,8 @@ public final class FindMeetingQuery {
 
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
 
-    // if there are no (non-optional) attendees, return {@code TimeRange.WHOLE_DAY} as a list
-    if (request.getAttendees().isEmpty()) {
+    // if there are no events or no (non-optional) attendees, return {@code TimeRange.WHOLE_DAY} as a list
+    if (request.getAttendees().isEmpty() || events.isEmpty()) {
         return Arrays.asList(TimeRange.WHOLE_DAY);
     }
 

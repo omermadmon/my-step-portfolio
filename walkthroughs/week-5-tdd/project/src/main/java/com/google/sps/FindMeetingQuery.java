@@ -42,12 +42,13 @@ public final class FindMeetingQuery {
 
     1. store relevant time ranges in a list
     2. sort list by starting time 
-    3. unite all overlapping time ranges ni list
+    3. unite all overlapping time ranges in list
     4. iterate from i=0 to i=NUMBER_OF_MINUTES_IN_DAY and create the results list
     */
 
-    Collection<TimeRange> relevantTimeRanges = FindMeetingQuery.filterIrrelevantTimesRanges(events, request.getAttendees());
-    
+    ArrayList<TimeRange> relevantTimeRanges = FindMeetingQuery.filterIrrelevantTimesRanges(events, request.getAttendees());
+    Collections.sort(relevantTimeRanges, TimeRange.ORDER_BY_START);
+
     
     // TODO: Remove this after implementing the rest of the method.
     throw new UnsupportedOperationException("TODO: Implement this method.");
@@ -55,8 +56,8 @@ public final class FindMeetingQuery {
 
   /** Filter out events if their attendees are none of the requested attendees. 
       Return only the time range.*/
-  private static Collection<TimeRange> filterIrrelevantTimesRanges(Collection<Event> events, Collection<String> attendees) {
-      Collection<TimeRange> relevantTimeRanges = new ArrayList<TimeRange>();
+  private static ArrayList<TimeRange> filterIrrelevantTimesRanges(Collection<Event> events, Collection<String> attendees) {
+      ArrayList<TimeRange> relevantTimeRanges = new ArrayList<TimeRange>();
       for (Event event : events) {
           if (FindMeetingQuery.isRelevant(event, attendees)) relevantTimeRanges.add(event.getWhen());
       }

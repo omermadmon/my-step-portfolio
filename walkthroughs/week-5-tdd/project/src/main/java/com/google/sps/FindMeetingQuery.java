@@ -24,7 +24,6 @@ public final class FindMeetingQuery {
   private static final long NUMBER_OF_MINUTES_IN_DAY = 60*24;
 
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
-    // throw new UnsupportedOperationException("TODO: Implement this method.");
 
     // if there are no (non-optional) attendees, return {@code TimeRange.WHOLE_DAY} as a list
     if (request.getAttendees().isEmpty()) {
@@ -36,6 +35,7 @@ public final class FindMeetingQuery {
         return Arrays.asList();
     }
 
+    // TODO: Implement the rest of the method.
     throw new UnsupportedOperationException("TODO: Implement this method.");
   }
 

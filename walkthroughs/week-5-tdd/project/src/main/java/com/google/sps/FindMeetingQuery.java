@@ -21,18 +21,22 @@ import java.util.Collections;
 import java.util.List;
 
 public final class FindMeetingQuery {
+  private static final long NUMBER_OF_MINUTES_IN_DAY = 60*24;
 
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
     // throw new UnsupportedOperationException("TODO: Implement this method.");
 
-    // if there are no (non-optional) attendees, return {@code TimeRange.WHOLE_DAY}
+    // if there are no (non-optional) attendees, return {@code TimeRange.WHOLE_DAY} as a list
     if (request.getAttendees().isEmpty()) {
         return Arrays.asList(TimeRange.WHOLE_DAY);
     }
 
-    else {
-        throw new UnsupportedOperationException("TODO: Implement this method.");
+    // if there duration is longer than a day, return an empty list
+    if (request.getDuration() > NUMBER_OF_MINUTES_IN_DAY) {
+        return Arrays.asList();
     }
+
+    throw new UnsupportedOperationException("TODO: Implement this method.");
   }
 
 }

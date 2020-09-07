@@ -19,7 +19,6 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-
 import java.util.Comparator;
 
 public final class FindMeetingQuery {
@@ -37,21 +36,9 @@ public final class FindMeetingQuery {
         return Arrays.asList();
     }
 
-    /**
-    LOGIC:
-
-    1. store relevant time ranges in a list
-    2. sort list by starting time 
-    3. unite all overlapping time ranges in list
-    4. iterate from i=0 to i=NUMBER_OF_MINUTES_IN_DAY and create the results list
-    */
-
     ArrayList<TimeRange> relevantTimeRanges = FindMeetingQuery.filterIrrelevantTimesRanges(events, request.getAttendees());
     Collections.sort(relevantTimeRanges, TimeRange.ORDER_BY_START);
-
-    
-    // TODO: Remove this after implementing the rest of the method.
-    throw new UnsupportedOperationException("TODO: Implement this method.");
+    return FindMeetingQuery.findAvilableTimesRanges(relevantTimeRanges, request.getDuration());
   }
 
   /** Filter out events if their attendees are none of the requested attendees. 
@@ -76,4 +63,41 @@ public final class FindMeetingQuery {
       return false;
   }
 
+  /** Given the occupied slots (sorted by start date) and the meeting duration,
+      return a list of time ranges where all meeting attendees are avilable. */
+  private static Collection<TimeRange> findAvilableTimesRanges(ArrayList<TimeRange> occupiedSlots, long meetingDuration) {
+      
+      if (occupiedSlots.isEmpty()) {
+          return Arrays.asList(TimeRange.WHOLE_DAY);
+      }
+      
+      ArrayList<TimeRange> result = new ArrayList<TimeRange>();
+
+      // init start and end of the next avilable slot (to add to result).
+      int start = TimeRange.START_OF_DAY;
+      int end;
+
+      for (TimeRange occupiedSlot : occupiedSlots) {
+
+          end = occupiedSlot.start();
+          if (meetingDuration <= end - start) {
+              result.add(TimeRange.fromStartEnd(start, end, false));
+          }
+
+          if (start <= occupiedSlot.end()) {
+              start = occupiedSlot.end();
+          }
+          
+      }
+
+      // add residual to result (if longer than meeting duration).
+      end = TimeRange.END_OF_DAY;
+      if (meetingDuration <= end - start) {
+              result.add(TimeRange.fromStartEnd(start, end, false));
+      }
+
+      return result;
+  }
+
 }
+

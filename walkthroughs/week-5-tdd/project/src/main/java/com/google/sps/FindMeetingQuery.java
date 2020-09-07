@@ -93,7 +93,7 @@ public final class FindMeetingQuery {
       // add residual to result (if longer than meeting duration).
       end = TimeRange.END_OF_DAY;
       if (meetingDuration <= end - start) {
-              result.add(TimeRange.fromStartEnd(start, end, false));
+              result.add(TimeRange.fromStartEnd(start, end, true));
       }
 
       return result;

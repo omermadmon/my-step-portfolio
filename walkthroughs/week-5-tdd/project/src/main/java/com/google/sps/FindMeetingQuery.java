@@ -20,6 +20,8 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+import java.util.Comparator;
+
 public final class FindMeetingQuery {
   private static final long NUMBER_OF_MINUTES_IN_DAY = 60*24;
 
@@ -35,8 +37,42 @@ public final class FindMeetingQuery {
         return Arrays.asList();
     }
 
-    // TODO: Implement the rest of the method.
+    /**
+    LOGIC:
+
+    1. store relevant time ranges in a list
+    2. sort list by starting time 
+    3. unite all overlapping time ranges ni list
+    4. iterate from i=0 to i=NUMBER_OF_MINUTES_IN_DAY and create the results list
+    */
+
+    Collection<TimeRange> relevantTimeRanges = FindMeetingQuery.filterIrrelevantTimesRanges(events, request.getAttendees());
+    
+    
+    // TODO: Remove this after implementing the rest of the method.
     throw new UnsupportedOperationException("TODO: Implement this method.");
+  }
+
+  /** Filter out events if their attendees are none of the requested attendees. 
+      Return only the time range.*/
+  private static Collection<TimeRange> filterIrrelevantTimesRanges(Collection<Event> events, Collection<String> attendees) {
+      Collection<TimeRange> relevantTimeRanges = new ArrayList<TimeRange>();
+      for (Event event : events) {
+          if (FindMeetingQuery.isRelevant(event, attendees)) relevantTimeRanges.add(event.getWhen());
+      }
+
+      return relevantTimeRanges;
+  }
+
+  /** Return true iff at least one of the event's attendees is in the requested attendees. */
+  private static boolean isRelevant(Event event, Collection<String> attendees) {
+      for (String requestedAttendee : attendees) {
+          for (String eventAttendee : event.getAttendees()) {
+              if (requestedAttendee.equals(eventAttendee)) return true;
+          }
+      }
+
+      return false;
   }
 
 }

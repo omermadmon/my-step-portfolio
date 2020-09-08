@@ -397,6 +397,34 @@ public final class FindMeetingQueryTest {
 
     Assert.assertEquals(expected, actual);
   }
+
+  @Test
+  public void onlyOptionalAttendeesWithNoGap() {
+    // Only two optional attendeess without a gap. 
+    // Query should return that the whole day is available since 
+    // the optional attendees cannot be accommodated and the mandatory ones (all zero of them) 
+    // are free all day.
+    //
+    // Events  : |--A--|     |----A----|
+    // Day     : |---------------------|
+    // Options :       |----------|
+
+    Collection<Event> events = Arrays.asList(
+        new Event("Event 1", TimeRange.fromStartEnd(TimeRange.START_OF_DAY, TIME_0830AM, false),
+            Arrays.asList(PERSON_A)),
+        new Event("Event 2", TimeRange.fromStartEnd(TIME_0900AM, TimeRange.END_OF_DAY, true),
+            Arrays.asList(PERSON_A)));
+
+
+    MeetingRequest request = new MeetingRequest(Arrays.asList(), DURATION_60_MINUTES);
+    request.addOptionalAttendee(PERSON_A);
+    request.addOptionalAttendee(PERSON_B);
+
+    Collection<TimeRange> actual = query.query(events, request);
+    Collection<TimeRange> expected = Arrays.asList(TimeRange.WHOLE_DAY);
+
+    Assert.assertEquals(expected, actual);
+  }
 }
 
 

@@ -94,7 +94,7 @@ public final class FindMeetingQuery {
   }
 
   /** Given the occupied slots (sorted by start date) and the meeting duration,
-      return a list of time ranges where all meeting attendees are avilable. */
+      return a list of time ranges where all meeting attendees are available. */
   private static Collection<TimeRange> findAvailableTimeRanges(ArrayList<TimeRange> occupiedSlots, long meetingDuration) {
       
       if (occupiedSlots.isEmpty()) {
@@ -103,7 +103,7 @@ public final class FindMeetingQuery {
       
       ArrayList<TimeRange> result = new ArrayList<TimeRange>();
 
-      // init start and end of the next avilable slot (to add to result).
+      // init start and end of the next available slot (to add to result).
       int start = TimeRange.START_OF_DAY;
       int end;
 

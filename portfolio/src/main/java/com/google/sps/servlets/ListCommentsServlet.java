@@ -47,14 +47,7 @@ public class ListCommentsServlet extends HttpServlet {
     // Store all comments in a list.
     List<Comment> comments = new ArrayList<>();
     for (Entity entity : results.asIterable(FetchOptions.Builder.withLimit(limit))) {
-      long id = entity.getKey().getId();
-      String firstName = (String) entity.getProperty("fname");
-      String lastName = (String) entity.getProperty("lname");
-      long timestamp = (long) entity.getProperty("timestamp");
-      String commentText = (String) entity.getProperty("text");
-
-      Comment comment = new Comment(id, firstName, lastName,
-                                    timestamp, commentText);
+      Comment comment = new Comment(entity);
       comments.add(comment);
     }
 

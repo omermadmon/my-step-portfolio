@@ -14,6 +14,8 @@
 
 package com.google.sps.data;
 
+import com.google.appengine.api.datastore.Entity;
+
 /** Class responsible for representing users' comments on the website. */
 public final class Comment {
 
@@ -30,5 +32,13 @@ public final class Comment {
     this.lastName = lastName;
     this.timestamp = timestamp;
     this.text = text;
+  }
+
+  public Comment(Entity entity) {
+    this.id = entity.getKey().getId();
+    this.firstName = (String) entity.getProperty("fname");
+    this.lastName = (String) entity.getProperty("lname");
+    this.timestamp = (long) entity.getProperty("timestamp");
+    this.text = (String) entity.getProperty("text");
   }
 }

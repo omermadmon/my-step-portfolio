@@ -20,6 +20,8 @@ package com.google.sps;
 public class Greeter {
   /**
    * Returns a greeting for the given name.
+   * @param  name  a name to greet.
+   * @return  a greeting message with sanitized name (punctuations and spare spaces are removed). 
    */
   public String greet(String name) {
     return "Hello " + name.trim().replaceAll("\\p{Punct}", "");

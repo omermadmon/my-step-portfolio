@@ -43,8 +43,8 @@ public final class FindMeetingQuery {
         return Arrays.asList(TimeRange.WHOLE_DAY);
     }
 
-    
-
+    /** create two lists: one for time ranges of relevant events w.r.t all attendees,
+        and one for time ranges of relevant events w.r.t only mandatory attendees. */
     ArrayList<ArrayList<TimeRange>> relevantTimeRangesLists = 
                 FindMeetingQuery.filterIrrelevantTimesRanges(events, allAttendees, mandatoryAttendees);
     
@@ -63,8 +63,9 @@ public final class FindMeetingQuery {
     }
   }
 
-  /** Filter out events if their attendees are none of the requested attendees. 
-      Return only the time range.*/
+  /** Get all events, a list of all attendees and a list of mandatory attendees only.
+      return a list of two lists: one for time ranges of relevant events w.r.t all attendees,
+      and one for time ranges of relevant events w.r.t only mandatory attendees.*/
   private static ArrayList<ArrayList<TimeRange>> filterIrrelevantTimesRanges(Collection<Event> events, Collection<String> allAttendees, Collection<String> mandatoryAttendees) {
       ArrayList<ArrayList<TimeRange>> resultLists = new ArrayList<ArrayList<TimeRange>> ();
       

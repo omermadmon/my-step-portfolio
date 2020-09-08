@@ -53,13 +53,12 @@ public final class FindMeetingQuery {
 
     // try to consider all attendees. If failed, consider only mandatory attendees.
     Collections.sort(relevantTimeRangesAll, TimeRange.ORDER_BY_START);
-    Collection<TimeRange> availableTimeRangesAll = 
-                FindMeetingQuery.findAvailableTimeRanges(relevantTimeRangesAll, request.getDuration());
+    Collection<TimeRange> availableTimeRangesAll = findAvailableTimeRanges(relevantTimeRangesAll, request.getDuration());
     if (!availableTimeRangesAll.isEmpty()) {
         return availableTimeRangesAll;
     } else {
         Collections.sort(relevantTimeRangesMandatory, TimeRange.ORDER_BY_START);
-        return FindMeetingQuery.findAvailableTimeRanges(relevantTimeRangesMandatory, request.getDuration());
+        return findAvailableTimeRanges(relevantTimeRangesMandatory, request.getDuration());
     }
   }
 

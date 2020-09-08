@@ -374,7 +374,7 @@ public final class FindMeetingQueryTest {
   @Test
   public void onlyOptionalAttendeesWithGap() {
     // Only two optional attendeess with a gap. 
-    // The gap should be identified and retuned.
+    // The gap should be identified and returned.
     //
     // Events  : |--A--|     |----A----|
     // Day     : |---------------------|
@@ -426,9 +426,3 @@ public final class FindMeetingQueryTest {
     Assert.assertEquals(expected, actual);
   }
 }
-
-
-
-
-
-

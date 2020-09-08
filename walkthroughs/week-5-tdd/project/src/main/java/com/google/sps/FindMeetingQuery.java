@@ -84,13 +84,7 @@ public final class FindMeetingQuery {
 
   /** Return true iff at least one of the event's attendees is in the requested attendees. */
   private static boolean isRelevant(Event event, Collection<String> attendees) {
-      for (String requestedAttendee : attendees) {
-          for (String eventAttendee : event.getAttendees()) {
-              if (requestedAttendee.equals(eventAttendee)) return true;
-          }
-      }
-
-      return false;
+      return !Collections.disjoint(event.getAttendees(), attendees);
   }
 
   /** Given the occupied slots (sorted by start date) and the meeting duration,

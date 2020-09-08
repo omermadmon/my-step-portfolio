@@ -38,13 +38,11 @@ public final class GreeterTest {
 
   @Test
   public void testGreetingTrimsWhitespace() {
-  // Whitespace should be trimmed
   Assert.assertEquals("Hello Ada", greeting);
   }
 
   @Test
   public void testGreetingRemovesPunctuations() {
-  // Punctuations should be removed
   Assert.assertEquals("Hello Ada", greeting);
   }
 }

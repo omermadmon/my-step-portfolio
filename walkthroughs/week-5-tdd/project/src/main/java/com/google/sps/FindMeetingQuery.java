@@ -26,21 +26,24 @@ public final class FindMeetingQuery {
 
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
 
-    // TODO: if there duration is longer than a day, return an empty list
-    if (request.getDuration() > NUMBER_OF_MINUTES_IN_DAY) {
-        return Arrays.asList();
-    }
-    
-    // TODO: if there are no events or no (non-optional) attendees, return {@code TimeRange.WHOLE_DAY} as a list
-    if (request.getAttendees().isEmpty() || events.isEmpty()) {
-        return Arrays.asList(TimeRange.WHOLE_DAY);
-    }
-
+    // Create mandatory, optional and all attendees lists.
     Collection<String> mandatoryAttendees = request.getAttendees();
     Collection<String> optionalAttendees = request.getOptionalAttendees();
     ArrayList<String> allAttendees = new ArrayList<String>();
     allAttendees.addAll(mandatoryAttendees);
     allAttendees.addAll(optionalAttendees);
+
+    // if there duration is longer than a day, return an empty list
+    if (request.getDuration() > NUMBER_OF_MINUTES_IN_DAY) {
+        return Arrays.asList();
+    }
+    
+    // if there are no events or no (non-optional) attendees, return {@code TimeRange.WHOLE_DAY} as a list
+    if (allAttendees.isEmpty() || events.isEmpty()) {
+        return Arrays.asList(TimeRange.WHOLE_DAY);
+    }
+
+    
 
     ArrayList<ArrayList<TimeRange>> relevantTimeRangesLists = 
                 FindMeetingQuery.filterIrrelevantTimesRanges(events, allAttendees, mandatoryAttendees);

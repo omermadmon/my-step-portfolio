@@ -14,6 +14,8 @@
 
 package com.google.sps.data;
 
+import com.google.appengine.api.datastore.Entity;
+
 /** Class responsible for representing my FM achievements. */
 public final class Achievement {
 
@@ -30,5 +32,13 @@ public final class Achievement {
     this.club = club;
     this.geo = geo;
     this.text = text;
+  }
+
+  public Achievement(Entity entity) {
+    this.id = entity.getKey().getId();
+    this.title = (String) entity.getProperty("title");
+    this.club = (String) entity.getProperty("club");
+    this.geo = (String) entity.getProperty("geo");
+    this.text = (String) entity.getProperty("text");
   }
 }

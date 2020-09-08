@@ -62,14 +62,7 @@ public class RandomAchievementServlet extends HttpServlet {
 
     if (entity != null) {
         // Create an achievement from the random entity.
-        long id = entity.getKey().getId();
-        String title = (String) entity.getProperty("title");
-        String club = (String) entity.getProperty("club");
-        String geo = (String) entity.getProperty("geo");
-        String text = (String) entity.getProperty("text");
-
-        Achievement randomAchievement = new Achievement(id, title, club,
-                                        geo, text);
+        Achievement randomAchievement = new Achievement(entity);
 
         // Transform comments list to JSON string.
         Gson gson = new Gson();

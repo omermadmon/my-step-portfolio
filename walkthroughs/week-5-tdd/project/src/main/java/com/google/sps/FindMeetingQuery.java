@@ -33,7 +33,7 @@ public final class FindMeetingQuery {
     allAttendees.addAll(mandatoryAttendees);
     allAttendees.addAll(optionalAttendees);
 
-    // if there duration is longer than a day, return an empty list
+    // if the duration is longer than a day, return an empty list
     if (request.getDuration() > NUMBER_OF_MINUTES_IN_DAY) {
         return Arrays.asList();
     }

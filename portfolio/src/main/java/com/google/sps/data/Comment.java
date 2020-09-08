@@ -25,6 +25,15 @@ public final class Comment {
   private final long timestamp;
   private final String text;
 
+  /**
+  * A constructor who gets the specific fields values of the comment.
+  * Is being used whenever a comment object has to be created manually.
+  * @param  id  a unique serial id number.
+  * @param  firstName  user's first name.
+  * @param  lastName  user's last name.
+  * @param  timestamp  a timestamp indicating when the comment entity was created and written to db.
+  * @param  text  the comment's content.
+  */
   public Comment(long id, String firstName, String lastName, 
                  long timestamp, String text) {
     this.id = id;
@@ -34,6 +43,11 @@ public final class Comment {
     this.text = text;
   }
 
+  /**
+  * A constructor who gets a datastore entity of the comment, parses it and then initialized its properties.
+  * Is being used whenever a comment object is constructed out of a datastore entity.
+  * @param  entity  a datastore entity.
+  */
   public Comment(Entity entity) {
     this.id = entity.getKey().getId();
     this.firstName = (String) entity.getProperty("fname");

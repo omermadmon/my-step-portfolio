@@ -22,27 +22,25 @@ import org.junit.runners.JUnit4;
 
 @RunWith(JUnit4.class)
 public final class GreeterTest {
-  private static Greeter greeter;
-  private static String greeting;
-
-  @BeforeClass
-  public static void initGreeter() {
-    greeter = new Greeter();
-    greeting = greeter.greet("Ada");
-  }
 
   @Test
   public void testGreeting() {
+    Greeter greeter = new Greeter();
+    String greeting = greeter.greet("Ada");
     Assert.assertEquals("Hello Ada", greeting);
   }
 
   @Test
   public void testGreetingTrimsWhitespace() {
-  Assert.assertEquals("Hello Ada", greeting);
+    Greeter greeter = new Greeter();
+    String greeting = greeter.greet("Ada");
+    Assert.assertEquals("Hello Ada", greeting);
   }
 
   @Test
   public void testGreetingRemovesPunctuations() {
-  Assert.assertEquals("Hello Ada", greeting);
+    Greeter greeter = new Greeter();
+    String greeting = greeter.greet("Ada");
+    Assert.assertEquals("Hello Ada", greeting);
   }
 }

@@ -130,6 +130,5 @@ public final class FindMeetingQuery {
 
       return result;
   }
-
 }
 

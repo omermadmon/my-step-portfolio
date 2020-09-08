@@ -291,9 +291,9 @@ public final class FindMeetingQueryTest {
         new Event("Event 1", TimeRange.fromStartDuration(TIME_0800AM, DURATION_30_MINUTES),
             Arrays.asList(PERSON_A)),
         new Event("Event 2", TimeRange.fromStartDuration(TIME_0900AM, DURATION_30_MINUTES),
-            Arrays.asList(PERSON_B)));
+            Arrays.asList(PERSON_B)),
         new Event("Event 3", TimeRange.fromStartDuration(TimeRange.START_OF_DAY, TimeRange.WHOLE_DAY.duration()),
-            Arrays.asList(PERSON_C));
+            Arrays.asList(PERSON_C)));
 
 
     MeetingRequest request =
@@ -316,7 +316,7 @@ public final class FindMeetingQueryTest {
     // We should see two options because the optional attendee should be considered.
     //
     // Events  :       |--A--|     |--B--|
-    //           |-----------|--C--|-----------|
+    //                       |--C--|
     // Day     : |-----------------------------|
     // Options : |--1--|                 |--3--|
 
@@ -324,9 +324,9 @@ public final class FindMeetingQueryTest {
         new Event("Event 1", TimeRange.fromStartDuration(TIME_0800AM, DURATION_30_MINUTES),
             Arrays.asList(PERSON_A)),
         new Event("Event 2", TimeRange.fromStartDuration(TIME_0900AM, DURATION_30_MINUTES),
-            Arrays.asList(PERSON_B)));
+            Arrays.asList(PERSON_B)),
         new Event("Event 3", TimeRange.fromStartDuration(TIME_0830AM, DURATION_30_MINUTES),
-            Arrays.asList(PERSON_C));
+            Arrays.asList(PERSON_C)));
 
 
     MeetingRequest request =

@@ -84,6 +84,7 @@ public final class FindMeetingQuery {
               result.add(TimeRange.fromStartEnd(start, end, false));
           }
 
+          // in case where previous event contains the current event.
           if (start <= occupiedSlot.end()) {
               start = occupiedSlot.end();
           }

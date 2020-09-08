@@ -53,13 +53,13 @@ public final class FindMeetingQuery {
 
     // try to consider all attendees. If failed, consider only mandatory attendees.
     Collections.sort(relevantTimeRangesAll, TimeRange.ORDER_BY_START);
-    Collection<TimeRange> avilableTimeRangesAll = 
-                FindMeetingQuery.findAvilableTimesRanges(relevantTimeRangesAll, request.getDuration());
-    if (!avilableTimeRangesAll.isEmpty()) {
-        return avilableTimeRangesAll;
+    Collection<TimeRange> availableTimeRangesAll = 
+                FindMeetingQuery.findAvailableTimeRanges(relevantTimeRangesAll, request.getDuration());
+    if (!availableTimeRangesAll.isEmpty()) {
+        return availableTimeRangesAll;
     } else {
         Collections.sort(relevantTimeRangesMandatory, TimeRange.ORDER_BY_START);
-        return FindMeetingQuery.findAvilableTimesRanges(relevantTimeRangesMandatory, request.getDuration());
+        return FindMeetingQuery.findAvailableTimeRanges(relevantTimeRangesMandatory, request.getDuration());
     }
   }
 
@@ -96,7 +96,7 @@ public final class FindMeetingQuery {
 
   /** Given the occupied slots (sorted by start date) and the meeting duration,
       return a list of time ranges where all meeting attendees are avilable. */
-  private static Collection<TimeRange> findAvilableTimesRanges(ArrayList<TimeRange> occupiedSlots, long meetingDuration) {
+  private static Collection<TimeRange> findAvailableTimeRanges(ArrayList<TimeRange> occupiedSlots, long meetingDuration) {
       
       if (occupiedSlots.isEmpty()) {
           return Arrays.asList(TimeRange.WHOLE_DAY);

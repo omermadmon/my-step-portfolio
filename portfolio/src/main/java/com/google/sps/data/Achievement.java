@@ -26,8 +26,7 @@ public final class Achievement {
   private final String text;
 
   /**
-  * A constructor who gets the specific fields values of the achievement.
-  * Is being used whenever an achievement object has to be created manually.
+  * Used whenever an achievement object has to be created manually.
   * @param  id  a unique serial id number.
   * @param  title  full club name (e.g "Maccabi Haifa FC").
   * @param  club  lowercase short club name (e.g "mhfc"), used to retrieve the corresponding image to be displayed on a Google Maps map.
@@ -44,8 +43,7 @@ public final class Achievement {
   }
 
   /**
-  * A constructor who gets a datastore entity of the achievement, parses it and then initialized its properties.
-  * Is being used whenever an achievement object is constructed out of a datastore entity.
+  * Used whenever an achievement object is constructed out of a datastore entity.
   * @param  entity  a datastore entity.
   */
   public Achievement(Entity entity) {

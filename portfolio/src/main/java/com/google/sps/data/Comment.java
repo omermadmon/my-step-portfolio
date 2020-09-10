@@ -26,8 +26,7 @@ public final class Comment {
   private final String text;
 
   /**
-  * A constructor who gets the specific fields values of the comment.
-  * Is being used whenever a comment object has to be created manually.
+  * Used whenever a comment object has to be created manually.
   * @param  id  a unique serial id number.
   * @param  firstName  user's first name.
   * @param  lastName  user's last name.
@@ -44,8 +43,7 @@ public final class Comment {
   }
 
   /**
-  * A constructor who gets a datastore entity of the comment, parses it and then initialized its properties.
-  * Is being used whenever a comment object is constructed out of a datastore entity.
+  * Used whenever a comment object is constructed out of a datastore entity.
   * @param  entity  a datastore entity.
   */
   public Comment(Entity entity) {

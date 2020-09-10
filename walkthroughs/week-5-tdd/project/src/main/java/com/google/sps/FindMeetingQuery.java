@@ -37,11 +37,6 @@ public final class FindMeetingQuery {
     if (request.getDuration() > NUMBER_OF_MINUTES_IN_DAY) {
         return Arrays.asList();
     }
-    
-    // if there are no events or no (non-optional) attendees, return {@code TimeRange.WHOLE_DAY} as a list
-    if (allAttendees.isEmpty() || events.isEmpty()) {
-        return Arrays.asList(TimeRange.WHOLE_DAY);
-    }
 
     // create two lists: one for time ranges of relevant events w.r.t all attendees,
     // and one for time ranges of relevant events w.r.t only mandatory attendees. 

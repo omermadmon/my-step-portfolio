@@ -14,6 +14,8 @@
 
 package com.google.sps.data;
 
+import com.google.appengine.api.datastore.Entity;
+
 /** Class responsible for representing my FM achievements. */
 public final class Achievement {
 
@@ -23,6 +25,14 @@ public final class Achievement {
   private final String geo;
   private final String text;
 
+  /**
+  * Used whenever an achievement object has to be created manually.
+  * @param  id  a unique serial id number.
+  * @param  title  full club name (e.g "Maccabi Haifa FC").
+  * @param  club  lowercase short club name (e.g "mhfc"), used to retrieve the corresponding image to be displayed on a Google Maps map.
+  * @param  geo  a JSON string with properties of "latitude" and "longitude", for displaying the achievement as a marker on a Google Maps map.
+  * @param  text  achievement description.
+  */
   public Achievement(long id, String title, String club, 
                  String geo, String text) {
     this.id = id;
@@ -30,5 +40,17 @@ public final class Achievement {
     this.club = club;
     this.geo = geo;
     this.text = text;
+  }
+
+  /**
+  * Used whenever an achievement object is constructed out of a datastore entity.
+  * @param  entity  a datastore entity.
+  */
+  public Achievement(Entity entity) {
+    this.id = entity.getKey().getId();
+    this.title = (String) entity.getProperty("title");
+    this.club = (String) entity.getProperty("club");
+    this.geo = (String) entity.getProperty("geo");
+    this.text = (String) entity.getProperty("text");
   }
 }

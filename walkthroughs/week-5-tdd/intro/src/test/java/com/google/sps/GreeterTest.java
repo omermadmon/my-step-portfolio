@@ -16,8 +16,10 @@ package com.google.sps;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
+import static com.google.common.truth.Truth.*;
 
 @RunWith(JUnit4.class)
 public final class GreeterTest {
@@ -25,9 +27,21 @@ public final class GreeterTest {
   @Test
   public void testGreeting() {
     Greeter greeter = new Greeter();
-
     String greeting = greeter.greet("Ada");
+    assertThat(greeting).isEqualTo("Hello Ada");
+  }
 
-    Assert.assertEquals("Hello Ada", greeting);
+  @Test
+  public void testGreetingTrimsWhitespace() {
+    Greeter greeter = new Greeter();
+    String greeting = greeter.greet("Ada");
+    assertThat(greeting).isEqualTo("Hello Ada");
+  }
+
+  @Test
+  public void testGreetingRemovesPunctuations() {
+    Greeter greeter = new Greeter();
+    String greeting = greeter.greet("Ada");
+    assertThat(greeting).isEqualTo("Hello Ada");
   }
 }

@@ -31,11 +31,10 @@ import javax.servlet.http.HttpServletResponse;
 /** [TODO: REMOVE] Servlet responsible for creating new dummy achievementS and add them to datastore (for testing). */
 @WebServlet("/new-achievement")
 public class NewAchievementServlet extends HttpServlet {
+  private DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-
-    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     
     // Count existing achievement.
     Query query = new Query("Achievement");

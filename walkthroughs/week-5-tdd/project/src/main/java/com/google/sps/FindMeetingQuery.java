@@ -57,7 +57,7 @@ public final class FindMeetingQuery {
       ArrayList<TimeRange> relevantTimeRanges = new ArrayList<TimeRange>();
 
       for (Event event : events) {
-          if (FindMeetingQuery.isRelevant(event, attendees)) relevantTimeRanges.add(event.getWhen());
+          if (isRelevant(event, attendees)) relevantTimeRanges.add(event.getWhen());
       }
 
       return relevantTimeRanges;

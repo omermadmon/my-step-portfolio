@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.stream.Collectors; 
 import java.util.List;
 import java.util.Comparator;
 
@@ -52,14 +53,11 @@ public final class FindMeetingQuery {
   /** Get all events and a list of attendees.
       return a sorted list of time ranges of relevant events w.r.t attendees. */
   private static ArrayList<TimeRange> filterIrrelevantTimesRanges(Collection<Event> events, Collection<String> attendees) {      
-      ArrayList<TimeRange> relevantTimeRanges = new ArrayList<TimeRange>();
-
-      for (Event event : events) {
-          if (isRelevant(event, attendees)) relevantTimeRanges.add(event.getWhen());
-      }
-
-      Collections.sort(relevantTimeRanges, TimeRange.ORDER_BY_START);
-      return relevantTimeRanges;
+      return events.stream()
+                   .filter(event -> isRelevant(event, attendees))
+                   .map(Event::getWhen)
+                   .sorted(TimeRange.ORDER_BY_START)
+                   .collect(Collectors.toCollection(ArrayList::new));      
   }
 
   /** Return true iff at least one of the event's attendees is in the requested attendees. */

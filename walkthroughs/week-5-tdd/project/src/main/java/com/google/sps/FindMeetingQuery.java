@@ -38,43 +38,29 @@ public final class FindMeetingQuery {
         return Arrays.asList();
     }
 
-    // create two lists: one for time ranges of relevant events w.r.t all attendees,
-    // and one for time ranges of relevant events w.r.t only mandatory attendees. 
-    ArrayList<ArrayList<TimeRange>> relevantTimeRangesLists = 
-                FindMeetingQuery.filterIrrelevantTimesRanges(events, allAttendees, mandatoryAttendees);
-    
-    ArrayList<TimeRange> relevantTimeRangesAll = relevantTimeRangesLists.get(0);
-    ArrayList<TimeRange> relevantTimeRangesMandatory = relevantTimeRangesLists.get(1);
-
     // try to consider all attendees. If failed, consider only mandatory attendees.
+    ArrayList<TimeRange> relevantTimeRangesAll = filterIrrelevantTimesRanges(events, allAttendees);
     Collections.sort(relevantTimeRangesAll, TimeRange.ORDER_BY_START);
     Collection<TimeRange> availableTimeRangesAll = findAvailableTimeRanges(relevantTimeRangesAll, request.getDuration());
     if (!availableTimeRangesAll.isEmpty()) {
         return availableTimeRangesAll;
     } else {
+        ArrayList<TimeRange> relevantTimeRangesMandatory = filterIrrelevantTimesRanges(events, mandatoryAttendees);
         Collections.sort(relevantTimeRangesMandatory, TimeRange.ORDER_BY_START);
         return findAvailableTimeRanges(relevantTimeRangesMandatory, request.getDuration());
     }
   }
 
-  /** Get all events, a list of all attendees and a list of mandatory attendees only.
-      return a list of two lists: one for time ranges of relevant events w.r.t all attendees,
-      and one for time ranges of relevant events w.r.t only mandatory attendees. */
-  private static ArrayList<ArrayList<TimeRange>> filterIrrelevantTimesRanges(Collection<Event> events, Collection<String> allAttendees, Collection<String> mandatoryAttendees) {
-      ArrayList<ArrayList<TimeRange>> resultLists = new ArrayList<ArrayList<TimeRange>> ();
-      
-      ArrayList<TimeRange> relevantTimeRangesAll = new ArrayList<TimeRange>();
-      ArrayList<TimeRange> relevantTimeRangesMandatory = new ArrayList<TimeRange>();
+  /** Get all events and a list of attendees.
+      return a list of time ranges of relevant events w.r.t attendees. */
+  private static ArrayList<TimeRange> filterIrrelevantTimesRanges(Collection<Event> events, Collection<String> attendees) {      
+      ArrayList<TimeRange> relevantTimeRanges = new ArrayList<TimeRange>();
 
       for (Event event : events) {
-          if (FindMeetingQuery.isRelevant(event, allAttendees)) relevantTimeRangesAll.add(event.getWhen());
-          if (FindMeetingQuery.isRelevant(event, mandatoryAttendees)) relevantTimeRangesMandatory.add(event.getWhen());
+          if (FindMeetingQuery.isRelevant(event, attendees)) relevantTimeRanges.add(event.getWhen());
       }
 
-      resultLists.add(relevantTimeRangesAll);
-      resultLists.add(relevantTimeRangesMandatory);
-
-      return resultLists;
+      return relevantTimeRanges;
   }
 
   /** Return true iff at least one of the event's attendees is in the requested attendees. */

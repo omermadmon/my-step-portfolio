@@ -40,19 +40,17 @@ public final class FindMeetingQuery {
 
     // try to consider all attendees. If failed, consider only mandatory attendees.
     ArrayList<TimeRange> relevantTimeRangesAll = filterIrrelevantTimesRanges(events, allAttendees);
-    Collections.sort(relevantTimeRangesAll, TimeRange.ORDER_BY_START);
     Collection<TimeRange> availableTimeRangesAll = findAvailableTimeRanges(relevantTimeRangesAll, request.getDuration());
     if (!availableTimeRangesAll.isEmpty()) {
         return availableTimeRangesAll;
     } else {
         ArrayList<TimeRange> relevantTimeRangesMandatory = filterIrrelevantTimesRanges(events, mandatoryAttendees);
-        Collections.sort(relevantTimeRangesMandatory, TimeRange.ORDER_BY_START);
         return findAvailableTimeRanges(relevantTimeRangesMandatory, request.getDuration());
     }
   }
 
   /** Get all events and a list of attendees.
-      return a list of time ranges of relevant events w.r.t attendees. */
+      return a sorted list of time ranges of relevant events w.r.t attendees. */
   private static ArrayList<TimeRange> filterIrrelevantTimesRanges(Collection<Event> events, Collection<String> attendees) {      
       ArrayList<TimeRange> relevantTimeRanges = new ArrayList<TimeRange>();
 
@@ -60,6 +58,7 @@ public final class FindMeetingQuery {
           if (isRelevant(event, attendees)) relevantTimeRanges.add(event.getWhen());
       }
 
+      Collections.sort(relevantTimeRanges, TimeRange.ORDER_BY_START);
       return relevantTimeRanges;
   }
 

@@ -93,7 +93,6 @@ public final class FindMeetingQuery {
           if (start <= occupiedSlot.end()) {
               start = occupiedSlot.end();
           }
-          
       }
 
       // add residual to result (if longer than meeting duration).

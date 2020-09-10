@@ -85,7 +85,7 @@ public final class FindMeetingQuery {
       for (TimeRange occupiedSlot : occupiedSlots) {
 
           end = occupiedSlot.start();
-          if (meetingDuration <= end - start) {
+          if (TimeRange.fromStartEnd(start, end, false).duration() >= meetingDuration) {
               result.add(TimeRange.fromStartEnd(start, end, false));
           }
 

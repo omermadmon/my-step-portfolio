@@ -43,7 +43,7 @@ public final class Achievement {
   }
 
   /**
-  * Used whenever an achievement object is constructed out of a data store entity.
+  * Used whenever an achievement object is constructed out of a datastore entity.
   * @param  entity  a datastore entity.
   */
   public Achievement(Entity entity) {

@@ -39,7 +39,7 @@ public final class FindMeetingQuery {
         return Arrays.asList();
     }
 
-    // try to consider all attendees first. If failed, consider only mandatory attendees.
+    // first, try to consider all attendees. If failed, consider only mandatory attendees.
     ArrayList<TimeRange> relevantTimeRangesAll = filterIrrelevantTimesRanges(events, allAttendees);
     Collection<TimeRange> availableTimeRangesAll = findAvailableTimeRanges(relevantTimeRangesAll, request.getDuration());
     if (!availableTimeRangesAll.isEmpty()) {
